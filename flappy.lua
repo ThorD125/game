@@ -22,9 +22,9 @@ groundScrollSpeed = 60
 backgroundLoopingPoint = 413 --this is where the image repeats
 
 pipeSpeed = 40
-GRAVITY = 10
+GRAVITY = 20
 
-pipeamount = (VIRTUAL_WINDOW_WIDTH / 2) / imgPipe:getWidth()
+pipeamount = (VIRTUAL_WINDOW_WIDTH / 2) / imgPipe:getWidth() + 2
 PIPE_WIDTH = imgPipe:getWidth()
 
 function love.load()
@@ -53,10 +53,10 @@ end
 function startGame()
     pipes = {}
 
-    i = 1
-    -- for i = 1, pipeamount do
-        pipes[i] = Pipe((VIRTUAL_WINDOW_WIDTH/2) + i * PIPE_WIDTH, 100, 50)
-    -- end
+    -- i = 1
+    for i = 1, pipeamount do
+        pipes[i] = Pipe((VIRTUAL_WINDOW_WIDTH/2) + 2 * i * PIPE_WIDTH, 100, 60)
+    end
 
     bird = Bird(50, 100, 'space')
 end

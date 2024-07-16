@@ -13,10 +13,8 @@ function Scoreboard:init(amountOfPeople, x, y, width)
 end
 
 function Scoreboard:render(dt)
-    
-    love.graphics.setDefaultFilter('nearest', 'nearest')
-
     love.graphics.setFont(fontXXl)
+    love.graphics.setColor(255, 255, 255, 255)
 
     for i, score in ipairs(self.scores) do
         love.graphics.print(tostring(score), self.x + (i-1)*self.width, self.y )
@@ -31,4 +29,13 @@ function Scoreboard:reset()
     for i = 1, self.amountOfPeople do
         self.scores[i] = 0
     end
+end
+
+function Scoreboard:checkWinner()
+    for i, score in ipairs(self.scores) do
+        if score == X_TO_WIN then
+            return i
+        end
+    end
+    return false
 end

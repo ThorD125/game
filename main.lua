@@ -4,6 +4,11 @@
 push = require 'libs.push.push'
 Class = require 'libs.hump.class'
 
+require 'classes.Ball'
+require 'classes.Paddle'
+require 'classes.Scoreboard'
+
+
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 VIRTUAL_WINDOW_WIDTH = 432
@@ -21,53 +26,34 @@ function love.load()
     -- })
     math.randomseed(os.time())
 
-    love.graphics.setDefaultFilter('nearest', 'nearest')
-    
-    normalFont = love.graphics.newFont('assets/font/pokemon.ttf', 8)
-    scoreFont = love.graphics.newFont('assets/font/pokemon.ttf', 32)
-
-    love.graphics.setFont(normalFont)
-
     push:setupScreen(VIRTUAL_WINDOW_WIDTH, VIRTUAL_WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = false,
         vsync = true
     })
 
-    player1Score = 0
-    player2Score = 0
+    player1 = Paddle(10, VIRTUAL_WINDOW_HEIGHT / 2 - 10, 5, 20, 'w', 's')
+    player2 = Paddle(VIRTUAL_WINDOW_WIDTH - 10, VIRTUAL_WINDOW_HEIGHT / 2 - 10, 5, 20, 'up', 'down')
 
-    player1Y = 10
-    player2Y = VIRTUAL_WINDOW_HEIGHT - 30
-    
-    ballX = VIRTUAL_WINDOW_HEIGHT / 2
-    ballY = VIRTUAL_WINDOW_WIDTH / 2
-    ballDX = math.random(2) == 1 and 100 or -100
-    ballDY = math.random(-50, 50)
+    ball = Ball(VIRTUAL_WINDOW_HEIGHT / 2, VIRTUAL_WINDOW_WIDTH / 2, 5, 5)
+
+
+    normalFont = love.graphics.newFont("assets/font/pokemon.ttf", 8)
+    scoreFont = love.graphics.newFont("assets/font/pokemon.ttf", 32)
+
+    score = Scoreboard(2, VIRTUAL_WINDOW_WIDTH / 2 - 50, VIRTUAL_WINDOW_HEIGHT / 3, 50, normalFont, scoreFont)
 
     gameState = 'start'
+    
 end
 
 function love.update(dt)
-    if love.keyboard.isDown('w') and love.keyboard.isDown('s') then
-        player1Y = player1Y
-    elseif love.keyboard.isDown('w') then
-        player1Y = math.max(0, player1Y - PADDLE_SPEED * dt)
-    elseif love.keyboard.isDown('s') then
-        player1Y = math.min(VIRTUAL_WINDOW_HEIGHT - 20, player1Y + PADDLE_SPEED * dt)
-    end
-
-    if love.keyboard.isDown('up') and love.keyboard.isDown('down') then
-        player2Y = player2Y
-    elseif love.keyboard.isDown('up') then
-        player2Y = math.max(0, player2Y - PADDLE_SPEED * dt)
-    elseif love.keyboard.isDown('down') then
-        player2Y = math.min(VIRTUAL_WINDOW_HEIGHT - 20, player2Y + PADDLE_SPEED * dt)
-    end
-
+    
+    player1:update(dt)
+    player2:update(dt)
+    
     if gameState == 'play' then
-        ballX = ballX + ballDX * dt
-        ballY = ballY + ballDY * dt
+        ball:update(dt)
     end
 end
 
@@ -78,23 +64,12 @@ function love.draw()
 
     push:start()
 
-    love.graphics.rectangle('fill', ballY, ballX, 5, 5)
-
-    love.graphics.rectangle('fill', 10, player1Y, 5, 20)
-    love.graphics.rectangle('fill', VIRTUAL_WINDOW_WIDTH - 10, player2Y, 5, 20)
-
-    love.graphics.setFont(normalFont)
-    love.graphics.printf(
-        text,          -- text to render
-        0,                      -- starting X (0 since we're going to center it based on width)
-        VIRTUAL_WINDOW_WIDTH / 2 - 6,  -- starting Y (halfway down the screen)
-        VIRTUAL_WINDOW_HEIGHT,           -- number of pixels to center within (the entire screen here)
-        'center')               -- alignment mode, can be 'center', 'left', or 'right'
+    player1:render()
+    player2:render()
+    ball:render()
     
-    love.graphics.setFont(scoreFont)
-    love.graphics.print(tostring(player1Score), VIRTUAL_WINDOW_WIDTH / 2 - 50, VIRTUAL_WINDOW_HEIGHT / 3)
-    love.graphics.print(tostring(player2Score), VIRTUAL_WINDOW_WIDTH / 2 + 30, VIRTUAL_WINDOW_HEIGHT / 3)
-    
+    score:render()
+
     push:finish()
 end
 
@@ -110,11 +85,7 @@ function love.keypressed(key)
         else
             gameState = 'start'
 
-            ballX = VIRTUAL_WINDOW_HEIGHT / 2
-            ballY = VIRTUAL_WINDOW_WIDTH / 2
-            ballDX = math.random(2) == 1 and 100 or -100
-            ballDY = math.random(-50, 50)
-        
+            ball:reset()
         end
     end
 end

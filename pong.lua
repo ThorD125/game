@@ -1,6 +1,3 @@
--- function love.draw()
---     love.graphics.print("Hello World", 400, 300)
--- end
 push = require 'libs.push.push'
 Class = require 'libs.hump.class'
 
@@ -38,6 +35,7 @@ function love.load()
         ['Xl'] = love.graphics.newFont("assets/font/pokemon.ttf", 16),
         ['XXl'] = love.graphics.newFont("assets/font/pokemon.ttf", 32)
     }
+
     sound = {
         ['collision']=love.audio.newSource('assets/sound/collision.wav', 'stream'),
         ['laser']=love.audio.newSource('assets/sound/laser.wav', 'stream'),
@@ -51,7 +49,6 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
-    
     player1:update(dt)
     player2:update(dt)
 
@@ -61,9 +58,9 @@ function love.update(dt)
         else
             ball.dx = -100
         end
+
         gameState = 'inGame'
     end
-
     
     if gameState == 'inGame' then
         ball:update(dt)
@@ -78,6 +75,7 @@ function love.update(dt)
                 ball.dy = math.random(10, 150)
             end
         end
+
         if ball:collides(player2) then
             ball.dx = -ball.dx * 1.03
             ball.x = player2.x - 4
@@ -112,7 +110,6 @@ end
 
 
 function love.draw()
-    
     push:start()
     
     player1:render()
@@ -139,7 +136,6 @@ function love.draw()
 end
 
 function love.keypressed(key)
-    text = key
     if key == 'escape' then
         love.event.quit()
     end
@@ -163,10 +159,3 @@ function displayFPS()
     love.graphics.setColor(0,255,0,255)
     love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()) .. " GS: " .. gameState..server, 10, 10)
 end
--- function love.gamepadpressed(joystick, button)
---     text = button
--- end
-
--- function love.gamepadaxis(joystick, axis, value)
---     text = axis
--- end

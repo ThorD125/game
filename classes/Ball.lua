@@ -48,5 +48,7 @@ function Ball:collides(paddle)
         return false
     end
 
+    sound.collision:play()
+
     return true
 end

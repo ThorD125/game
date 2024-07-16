@@ -13,7 +13,7 @@ function Scoreboard:init(amountOfPeople, x, y, width)
 end
 
 function Scoreboard:render(dt)
-    love.graphics.setFont(fontXXl)
+    love.graphics.setFont(font.XXl)
     love.graphics.setColor(255, 255, 255, 255)
 
     for i, score in ipairs(self.scores) do

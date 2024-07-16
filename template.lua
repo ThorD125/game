@@ -19,6 +19,13 @@ function love.load()
         vsync = true
     })
 
+    font = {
+        ['Sm'] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
+        ['l'] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
+        ['Xl'] = love.graphics.newFont("assets/font/pokemon.ttf", 16),
+        ['XXl'] = love.graphics.newFont("assets/font/pokemon.ttf", 32)
+    }
+
     gameState = 'game'
 end
 

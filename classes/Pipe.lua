@@ -1,11 +1,12 @@
 Pipe = Class{}
 
 
-function Pipe:init(x, y, width, height) --y is gap height location
+function Pipe:init(x, y, gapHeight)
     self.x = x
     self.y = y
-    self.width = width
-    self.height = height
+    self.width = PIPE_WIDTH
+    self.height = imgPipe:getHeight()
+    self.gapHeight = gapHeight
 end
 
 function Pipe:update(dt)
@@ -14,5 +15,5 @@ end
 
 function Pipe:render()
     love.graphics.draw(imgPipe, self.x, self.y)
-    love.graphics.draw(imgPipe, self.x, self.y - self.height, 0, 1, -1)
+    love.graphics.draw(imgPipe, self.x, self.y - self.gapHeight, 0, 1, -1)
 end

@@ -22,8 +22,10 @@ groundScrollSpeed = 60
 backgroundLoopingPoint = 413 --this is where the image repeats
 
 pipeSpeed = 40
-GRAVITY = 20
+GRAVITY = 10
 
+pipeamount = (VIRTUAL_WINDOW_WIDTH / 2) / imgPipe:getWidth()
+PIPE_WIDTH = imgPipe:getWidth()
 
 function love.load()
     love.window.setTitle('flapper')
@@ -42,10 +44,21 @@ function love.load()
         ['Xl'] = love.graphics.newFont("assets/font/pokemon.ttf", 16),
         ['XXl'] = love.graphics.newFont("assets/font/pokemon.ttf", 32)
     }
-    onepipe = Pipe(VIRTUAL_WINDOW_WIDTH, 100, 32, 50)
-    bird = Bird(50, 100, 'space')
 
-    gameState = 'game'
+    startGame()
+
+    gameState = 'menu'
+end
+
+function startGame()
+    pipes = {}
+
+    i = 1
+    -- for i = 1, pipeamount do
+        pipes[i] = Pipe((VIRTUAL_WINDOW_WIDTH/2) + i * PIPE_WIDTH, 100, 50)
+    -- end
+
+    bird = Bird(50, 100, 'space')
 end
 
 function love.resize(w, h)
@@ -53,11 +66,28 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
-    backgroundScroll = (backgroundScroll + backgroundScrollSpeed * dt) % backgroundLoopingPoint
-    groundScroll = (groundScroll + groundScrollSpeed * dt) % VIRTUAL_WINDOW_WIDTH
 
-    onepipe:update(dt)
-    bird:update(dt)
+    if gameState == 'game' then
+        backgroundScroll = (backgroundScroll + backgroundScrollSpeed * dt) % backgroundLoopingPoint
+        groundScroll = (groundScroll + groundScrollSpeed * dt) % VIRTUAL_WINDOW_WIDTH
+
+        for i, pipe in pairs(pipes) do
+            pipe:update(dt)
+        end
+
+        if bird.y < 0 or bird.y > VIRTUAL_WINDOW_HEIGHT then
+            gameState = 'gameover'
+        end
+
+        for i, pipe in pairs(pipes) do
+            if bird:collides(pipe) then
+                gameState = 'gameover'
+            end
+        end
+
+        bird:update(dt)
+    end
+
 end
 
 function love.draw()
@@ -67,7 +97,9 @@ function love.draw()
     love.graphics.draw(imgBackground, -backgroundScroll, 0)
     love.graphics.draw(imgGround, -groundScroll, VIRTUAL_WINDOW_HEIGHT - 16)
 
-    onepipe:render()
+    for i, pipe in pairs(pipes) do
+        pipe:render()
+    end
     bird:render()
 
     push:finish()
@@ -77,7 +109,20 @@ function love.keypressed(key)
     if key == 'escape' then
         love.event.quit()
     end
+    if key == 'enter' or key == 'return' then
+        if gameState == 'gameover' then
+            startGame()
+        end
+        gameState = 'game'
+    end
+    if gameState == 'game' then
+        if key == "space" then
+            gameState = 'game'
+            bird:jump()
+        end
+    end
 end
+
 
 function displayFPS()
     love.graphics.setFont(font.Sm)

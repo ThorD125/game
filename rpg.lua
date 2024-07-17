@@ -30,10 +30,6 @@ function love.load()
     gameState = 'game'
 end
 
-function love.resize(w, h)
-    push:resize(w, h)
-end
-
 function love.update(dt)
     if love.keyboard.isDown('up') then
         player:up(dt)
@@ -59,7 +55,6 @@ function love.draw()
 
     renderGame()
 
-    displayFPS()
     push:finish()
 end
 

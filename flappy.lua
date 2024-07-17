@@ -49,34 +49,17 @@ function love.load()
         vsync = true
     })
 
-    resetGame()
+    game = Game()
 
-    gStateMachine = StateMachine {
+    stateMachine = StateMachine {
         ['menu'] = function() return Menu() end,
         ['countdown'] = function() return CountdownState() end,
-        ['game'] = function() return Game() end,
+        ['game'] = function() return game end,
         ['gameover'] = function() return Gameover() end
 
     }
-    gStateMachine:change('menu')
-end
-
-function resetGame()
-    score = Scoreboard(1, 10, 10)
-    pipes = {}
-
-    -- i = 1
-    for i = 1, pipeamount do
-        pipeFirstOffset = math.random(VIRTUAL_WINDOW_WIDTH/4,VIRTUAL_WINDOW_WIDTH - (VIRTUAL_WINDOW_WIDTH/4) - 60)
-        pipes[i] = Pipe((VIRTUAL_WINDOW_WIDTH/2) + 2 * i * PIPE_WIDTH, pipeFirstOffset, 60)
-    end
-
-    bird = Bird(50, 100, 'space')
-end
-
-
-function love.resize(w, h)
-    push:resize(w, h)
+    
+    stateMachine:change('menu')
 end
 
 function love.update(dt)
@@ -87,17 +70,15 @@ function love.update(dt)
         love.event.quit()
     end
 
-    gStateMachine:update(dt)
+    stateMachine:update(dt)
 end
 
 function love.draw()
     push:start()
     love.graphics.draw(imgBackground, -backgroundScroll, 0)
     
-    gStateMachine:render()
+    stateMachine:render()
     
     love.graphics.draw(imgGround, -groundScroll, VIRTUAL_WINDOW_HEIGHT - 16)
-
-    displayFPS()
     push:finish()
 end

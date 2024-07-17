@@ -2,12 +2,14 @@ function renderHugeText(text, x, y)
     love.graphics.setFont(font.Xl)
     love.graphics.setColor(255,255,255,255)
     love.graphics.printf(text, x or 0, y or 50, VIRTUAL_WINDOW_WIDTH, 'center')
+    resetColor()
 end
 
 function displayFPS()
     love.graphics.setFont(font.Sm)
     love.graphics.setColor(0,255,0,255)
     love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
+    resetColor()
 end
 
 function love.keypressed(key)
@@ -26,4 +28,8 @@ function love.keyboard.wasPressed(key)
     else
         return false
     end
+end
+
+function resetColor()
+    love.graphics.setColor(255, 255, 255, 255)
 end

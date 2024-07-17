@@ -17,7 +17,9 @@ function CountdownState:update(dt)
         self.count = self.count - 1
 
         if self.count == 0 then
-            gStateMachine:change("game")
+            stateMachine:change("game")
+            -- renderHugeText(self.nextstate)
+            -- stateMachine:change(self.nextstate)
         end
     end
 end

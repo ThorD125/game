@@ -32,10 +32,6 @@ function love.load()
     gameState = 'menu'
 end
 
-function love.resize(w, h)
-    push:resize(w, h)
-end
-
 function love.update(dt)
     player1:update(dt)
     player2:update(dt)
@@ -106,8 +102,6 @@ function love.draw()
     
     score:render()
     
-    displayFPS()
-
     if gameState == 'winner' then
         love.graphics.setFont(font.XXl)
         love.graphics.setColor(0, 255, 0, 255)
@@ -118,6 +112,8 @@ function love.draw()
         else 
             love.graphics.print(tostring("player2"), VIRTUAL_WINDOW_WIDTH/2, VIRTUAL_WINDOW_HEIGHT/2)
         end
+        
+        resetColor()
     end
 
     push:finish()

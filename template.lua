@@ -42,7 +42,6 @@ function love.draw()
 
     renderGame()
 
-    displayFPS()
     push:finish()
 end
 
@@ -54,6 +53,7 @@ function renderGame()
     love.graphics.setFont(font.Sm)
     love.graphics.setColor(255,255,255,255)
     love.graphics.print(text, 50, 50)
+    resetColor()
 end
 
 

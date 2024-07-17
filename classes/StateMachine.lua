@@ -26,4 +26,6 @@ end
 
 function StateMachine:render()
 	self.current:render()
+    
+	displayFPS()
 end

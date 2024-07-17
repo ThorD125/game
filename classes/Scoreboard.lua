@@ -14,7 +14,7 @@ end
 
 function Scoreboard:render(dt)
     love.graphics.setFont(font.XXl)
-    love.graphics.setColor(255, 255, 255, 255)
+    resetColor()
 
     for i, score in ipairs(self.scores) do
         love.graphics.print(tostring(score), self.x + (i-1)*self.width, self.y )

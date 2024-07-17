@@ -25,7 +25,9 @@ require 'utils.utils'
 require 'flappy'
 -- require 'rpg'
 
-
+function love.resize(w, h)
+    push:resize(w, h)
+end
 
 -- function love.gamepadpressed(joystick, button)
 --     text = button

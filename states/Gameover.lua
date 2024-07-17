@@ -1,6 +1,7 @@
 Gameover = Class{__includes = BaseState}
 
 function Gameover:render()
+    love.graphics.setColor(colors.black)
     renderHugeText('Loser: '.. game.score:getScore(1))
 end
 

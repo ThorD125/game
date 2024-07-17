@@ -22,9 +22,33 @@ sound['bg']:setVolume(0.2)
 require 'utils.utils'
 require 'utils.colors'
 
+-- 01
 -- require 'pong'
-require 'flappy'
+-- 02
+-- require 'flappy'
+-- 03
+-- require 'breakout'
+-- 04
+-- require 'match'
+-- 05
+-- require 'mario'
+-- 06
+-- require 'zelda'
+-- 07
+-- require 'angry'
+-- 08
+-- require 'pokemon'
+-- 09
+-- require 'unity'
+-- 10
+-- require 'dreadhall'
+-- 11
+-- require 'portal'
+-- 12
+-- require 'valve'
+
 -- require 'rpg'
+require 'template'
 
 function love.resize(w, h)
     push:resize(w, h)

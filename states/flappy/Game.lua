@@ -2,7 +2,7 @@
 Game = Class{__includes = BaseState}
 
 function Game:init()
-    self:resetGame()
+    self:reset()
 end
 
 function Game:update(dt)
@@ -41,7 +41,7 @@ function Game:render()
 end
 
 
-function Game:resetGame()
+function Game:reset()
     self.score = Scoreboard(1, 10, 10)
     self.pipes = {}
 

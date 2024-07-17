@@ -1,7 +1,7 @@
 CountdownState = Class{__includes = BaseState}
 
 function CountdownState:init(nextstate, x, y, countNumbers, countTime)
-    self.nextstate = nextstate
+    self.nextstate = nextstate or "game"
     self.x = x or 0
     self.y = y or 120
     self.count = countNumbers or 3
@@ -26,5 +26,6 @@ end
 
 function CountdownState:render()
     love.graphics.setFont(font['XXl'])
+    love.graphics.setColor(colors.black)
     renderHugeText(tostring(self.count))
 end

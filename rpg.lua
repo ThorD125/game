@@ -1,10 +1,16 @@
 push = require 'libs.push.push'
 Class = require 'libs.hump.class'
 
+require 'classes.Player'
+
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
-VIRTUAL_WINDOW_WIDTH = 432
-VIRTUAL_WINDOW_HEIGHT = 243
+VIRTUAL_WINDOW_WIDTH = 256
+VIRTUAL_WINDOW_HEIGHT = 192
+
+tileWidth = VIRTUAL_WINDOW_WIDTH / 15
+tileHeight = VIRTUAL_WINDOW_HEIGHT / 15
+
 
 background = love.graphics.newImage('assets/images/background.png')
 
@@ -29,7 +35,18 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
-    
+    if love.keyboard.isDown('up') then
+        player:up(dt)
+    end
+    if love.keyboard.isDown('down') then
+        player:down(dt)
+    end
+    if love.keyboard.isDown('left') then
+        player:left(dt)
+    end
+    if love.keyboard.isDown('right') then
+        player:right(dt)
+    end
 end
 
 function love.draw()
@@ -47,16 +64,12 @@ function love.draw()
 end
 
 function setupGame()
-    text = 'setupgame'
+    player = Player(50, 50, 50, 50)
 end
 
 function renderGame()
-    love.graphics.setFont(font.Sm)
-    love.graphics.setColor(255,255,255,255)
-    love.graphics.print(text, 50, 50)
+    player:render()
 end
-
-
 
 function love.keypressed(key)
     if key == 'escape' then

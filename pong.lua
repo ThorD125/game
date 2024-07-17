@@ -29,18 +29,6 @@ function love.load()
     ball = Ball(VIRTUAL_WINDOW_WIDTH / 2, VIRTUAL_WINDOW_HEIGHT / 2, 5, 5)
     score = Scoreboard(2, VIRTUAL_WINDOW_WIDTH / 2 - 50, VIRTUAL_WINDOW_HEIGHT / 3, 50)
 
-    font = {
-        ['Sm'] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
-        ['l'] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
-        ['Xl'] = love.graphics.newFont("assets/font/pokemon.ttf", 16),
-        ['XXl'] = love.graphics.newFont("assets/font/pokemon.ttf", 32)
-    }
-
-    sound = {
-        ['collision']=love.audio.newSource('assets/sound/collision.wav', 'stream'),
-        ['laser']=love.audio.newSource('assets/sound/laser.wav', 'stream'),
-    }
-
     gameState = 'menu'
 end
 
@@ -152,10 +140,4 @@ function love.keypressed(key)
             ball:reset()
         end
     end
-end
-
-function displayFPS()
-    love.graphics.setFont(font.Sm)
-    love.graphics.setColor(0,255,0,255)
-    love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()) .. " GS: " .. gameState, 10, 10)
 end

@@ -12,7 +12,12 @@ font = {
 sound = {
     ['collision']=love.audio.newSource('assets/sound/collision.wav', 'stream'),
     ['laser']=love.audio.newSource('assets/sound/laser.wav', 'stream'),
+    ['bg']=love.audio.newSource('assets/sound/backgroound.mp3', 'stream'),
 }
+
+sound['bg']:setLooping(true)
+sound['bg']:play()
+sound['bg']:setVolume(0.2)
 
 require 'utils.utils'
 

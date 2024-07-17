@@ -106,11 +106,11 @@ function love.keypressed(key)
         -- if gameState == 'gameover' then
             resetGame()
         -- end
-        gStateMachine:change('CountdownState', "game")
+        gStateMachine:change('countdown', game)
     end
     -- if gameState == 'game' then
         if key == "space" then
-            gStateMachine:change('game')
+            -- gStateMachine:change('game')
             bird:jump()
         end
     -- end

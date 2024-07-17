@@ -17,12 +17,12 @@ function CountdownState:update(dt)
         self.count = self.count - 1
 
         if self.count == 0 then
-            gStateMachine:change(self.nextstate)
+            gStateMachine:change("game")
         end
     end
 end
 
 function CountdownState:render()
-    love.graphics.setFont(hugeFont)
-    love.graphics.printf(tostring(self.count), self.x, self.y, VIRTUAL_WIDTH, 'center')
+    love.graphics.setFont(font['XXl'])
+    renderHugeText(tostring(self.count))
 end

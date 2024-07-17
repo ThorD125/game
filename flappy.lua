@@ -1,12 +1,15 @@
 push = require 'libs.push.push'
 Class = require 'libs.hump.class'
 
+require 'classes.StateMachine'
+
 require 'classes.Pipe'
 require 'classes.Bird'
 require 'classes.Scoreboard'
 
-require 'classes.StateMachine'
 require 'states.BaseState'
+require 'states.CountdownState'
+
 require 'states.flappy.Menu'
 require 'states.flappy.Game'
 require 'states.flappy.Gameover'
@@ -50,8 +53,10 @@ function love.load()
 
     gStateMachine = StateMachine {
         ['menu'] = function() return Menu() end,
+        ['countdown'] = function() return CountdownState() end,
         ['game'] = function() return Game() end,
         ['gameover'] = function() return Gameover() end
+
     }
     gStateMachine:change('menu')
 end
@@ -101,7 +106,7 @@ function love.keypressed(key)
         -- if gameState == 'gameover' then
             resetGame()
         -- end
-        gStateMachine:change('game')
+        gStateMachine:change('CountdownState', "game")
     end
     -- if gameState == 'game' then
         if key == "space" then

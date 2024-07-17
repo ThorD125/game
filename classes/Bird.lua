@@ -4,17 +4,17 @@ Bird = Class{}
 function Bird:init(x, y, keyUp) --y is gap height location
     self.x = x
     self.y = y
-    self.width = imgBird:getWidth()
-    self.height = imgBird:getHeight()
+    self.width = img_bird:getWidth()
+    self.height = img_bird:getHeight()
     self.keyUp = keyUp
 end
 
 function Bird:update(dt)
-    self.y = self.y + GRAVITY * dt
+    self.y = self.y + gravity * dt
 end
 
 function Bird:jump()
-    self.y = self.y - GRAVITY
+    self.y = self.y - gravity
 end
 
 function Bird:collides(pipe)
@@ -44,5 +44,5 @@ end
 
 
 function Bird:render()
-    love.graphics.draw(imgBird, self.x, self.y)
+    love.graphics.draw(img_bird, self.x, self.y)
 end

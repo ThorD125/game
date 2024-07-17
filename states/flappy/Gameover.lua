@@ -7,6 +7,6 @@ end
 function Gameover:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         game:resetGame()
-        stateMachine:change('countdown', game)
+        state_machine:change('countdown', game)
     end
 end

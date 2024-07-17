@@ -29,8 +29,8 @@ function Ball:update(dt)
         self.dy = -self.dy
     end
 
-    if self.y >= VIRTUAL_WINDOW_HEIGHT - 5 then
-        self.y = VIRTUAL_WINDOW_HEIGHT - 5
+    if self.y >= virtual_window_height - 5 then
+        self.y = virtual_window_height - 5
         self.dy = -self.dy
     end
 end

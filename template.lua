@@ -3,8 +3,8 @@ Class = require 'libs.hump.class'
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
-VIRTUAL_WINDOW_WIDTH = 432
-VIRTUAL_WINDOW_HEIGHT = 243
+virtual_window_width = 432
+virtual_window_height = 243
 
 background = love.graphics.newImage('assets/images/background.png')
 
@@ -13,7 +13,7 @@ function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     math.randomseed(os.time())
 
-    push:setupScreen(VIRTUAL_WINDOW_WIDTH, VIRTUAL_WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
+    push:setupScreen(virtual_window_width, virtual_window_height, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = true,
         vsync = true
@@ -35,8 +35,8 @@ end
 function love.draw()
     push:start()
     
-    local scaleX = VIRTUAL_WINDOW_WIDTH / background:getWidth()
-    local scaleY = VIRTUAL_WINDOW_HEIGHT / background:getHeight()
+    local scaleX = virtual_window_width / background:getWidth()
+    local scaleY = virtual_window_height / background:getHeight()
     
     love.graphics.draw(background, 0, 0, 0, scaleX, scaleY)
 

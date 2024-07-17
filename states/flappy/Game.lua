@@ -14,12 +14,12 @@ function Game:update(dt)
         pipe:update(dt)
     end
 
-    if self.bird.y < 0 or self.bird.y > VIRTUAL_WINDOW_HEIGHT then
-        stateMachine:change('gameover')
+    if self.bird.y < 0 or self.bird.y > virtual_window_height then
+        state_machine:change('gameover')
     end
 
     if self.bird:collides(self.pipes[1]) then
-        stateMachine:change('gameover')
+        state_machine:change('gameover')
     end
 
     if self.bird.x + (self.bird.width/2) > self.pipes[1].x + (PIPE_WIDTH/2) then
@@ -45,9 +45,9 @@ function Game:resetGame()
     self.score = Scoreboard(1, 10, 10)
     self.pipes = {}
 
-    for i = 1, pipeamount do
-        pipeFirstOffset = math.random(VIRTUAL_WINDOW_WIDTH/4,VIRTUAL_WINDOW_WIDTH - (VIRTUAL_WINDOW_WIDTH/4) - 60)
-        self.pipes[i] = Pipe((VIRTUAL_WINDOW_WIDTH/2) + 2 * i * PIPE_WIDTH, pipeFirstOffset, 60)
+    for i = 1, pipe_amount do
+        pipeFirstOffset = math.random(virtual_window_width/4,virtual_window_width - (virtual_window_width/4) - 60)
+        self.pipes[i] = Pipe((virtual_window_width/2) + 2 * i * PIPE_WIDTH, pipeFirstOffset, 60)
     end
 
     self.bird = Bird(50, 100, 'space')

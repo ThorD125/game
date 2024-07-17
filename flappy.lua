@@ -14,36 +14,36 @@ require 'states.flappy.Menu'
 require 'states.flappy.Game'
 require 'states.flappy.Gameover'
 
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
-VIRTUAL_WINDOW_WIDTH = 512
-VIRTUAL_WINDOW_HEIGHT = 288
+window_width = 1280
+window_height = 720
+virtual_window_width = 512
+virtual_window_height = 288
 
-imgBackground = love.graphics.newImage('assets/images/flappy/bg.png')
-imgGround = love.graphics.newImage('assets/images/flappy/gr.png')
-imgPipe = love.graphics.newImage('assets/images/flappy/pipe.png') 
-imgBird = love.graphics.newImage('assets/images/flappy/bird.png') 
+img_background = love.graphics.newImage('assets/images/flappy/bg.png')
+img_ground = love.graphics.newImage('assets/images/flappy/gr.png')
+img_pipe = love.graphics.newImage('assets/images/flappy/pipe.png') 
+img_bird = love.graphics.newImage('assets/images/flappy/bird.png') 
 
-backgroundScroll = 0
-backgroundScrollSpeed = 30
-groundScroll = 0
-groundScrollSpeed = 60
+background_scroll = 0
+background_scroll_speed = 30
+ground_scroll = 0
+ground_scroll_speed = 60
 
-backgroundLoopingPoint = 413 --this is where the image repeats
+background_looping_point = 413 --this is where the image repeats
 
-pipeSpeed = 40
-GRAVITY = 20
-pipeFirstOffset = 60
+pipe_speed = 40
+gravity = 20
+pipe_first_offset = 60
 
-pipeamount = (VIRTUAL_WINDOW_WIDTH / 2) / imgPipe:getWidth() + 2
-PIPE_WIDTH = imgPipe:getWidth()
+pipe_amount = (virtual_window_width / 2) / img_pipe:getWidth() + 2
+pipe_width = img_pipe:getWidth()
 
 function love.load()
     love.window.setTitle('flapper')
     love.graphics.setDefaultFilter('nearest', 'nearest')
     math.randomseed(os.time())
 
-    push:setupScreen(VIRTUAL_WINDOW_WIDTH, VIRTUAL_WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
+    push:setupScreen(virtual_window_width, virtual_window_height, window_width, window_height, {
         fullscreen = false,
         resizable = true,
         vsync = true
@@ -51,7 +51,7 @@ function love.load()
 
     game = Game()
 
-    stateMachine = StateMachine {
+    state_machine = StateMachine {
         ['menu'] = function() return Menu() end,
         ['countdown'] = function() return CountdownState() end,
         ['game'] = function() return game end,
@@ -59,26 +59,26 @@ function love.load()
 
     }
     
-    stateMachine:change('menu')
+    state_machine:change('menu')
 end
 
 function love.update(dt)
-    backgroundScroll = (backgroundScroll + backgroundScrollSpeed * dt) % backgroundLoopingPoint
-    groundScroll = (groundScroll + groundScrollSpeed * dt) % VIRTUAL_WINDOW_WIDTH
+    background_scroll = (background_scroll + background_scroll_speed * dt) % background_looping_point
+    ground_scroll = (ground_scroll + ground_scroll_speed * dt) % virtual_window_width
 
     if love.keyboard.wasPressed('escape') then
         love.event.quit()
     end
 
-    stateMachine:update(dt)
+    state_machine:update(dt)
 end
 
 function love.draw()
     push:start()
-    love.graphics.draw(imgBackground, -backgroundScroll, 0)
+    love.graphics.draw(img_background, -background_scroll, 0)
     
-    stateMachine:render()
+    state_machine:render()
     
-    love.graphics.draw(imgGround, -groundScroll, VIRTUAL_WINDOW_HEIGHT - 16)
+    love.graphics.draw(img_ground, -ground_scroll, virtual_window_height - 16)
     push:finish()
 end

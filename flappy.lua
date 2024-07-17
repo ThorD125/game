@@ -3,6 +3,7 @@ Class = require 'libs.hump.class'
 
 require 'classes.Pipe'
 require 'classes.Bird'
+require 'classes.Scoreboard'
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -23,6 +24,7 @@ backgroundLoopingPoint = 413 --this is where the image repeats
 
 pipeSpeed = 40
 GRAVITY = 20
+pipeFirstOffset = 60
 
 pipeamount = (VIRTUAL_WINDOW_WIDTH / 2) / imgPipe:getWidth() + 2
 PIPE_WIDTH = imgPipe:getWidth()
@@ -45,17 +47,19 @@ function love.load()
         ['XXl'] = love.graphics.newFont("assets/font/pokemon.ttf", 32)
     }
 
-    startGame()
+    setupGame()
 
     gameState = 'menu'
 end
 
-function startGame()
+function setupGame()
+    score = Scoreboard(1, 10, 10)
     pipes = {}
 
     -- i = 1
     for i = 1, pipeamount do
-        pipes[i] = Pipe((VIRTUAL_WINDOW_WIDTH/2) + 2 * i * PIPE_WIDTH, 100, 60)
+        pipeFirstOffset = pipeFirstOffset + math.random(-20, 20)
+        pipes[i] = Pipe((VIRTUAL_WINDOW_WIDTH/2) + 2 * i * PIPE_WIDTH, pipeFirstOffset, 60)
     end
 
     bird = Bird(50, 100, 'space')
@@ -79,10 +83,17 @@ function love.update(dt)
             gameState = 'gameover'
         end
 
-        for i, pipe in pairs(pipes) do
-            if bird:collides(pipe) then
+
+
+        -- for i, pipe in pairs(pipes) do
+            if bird:collides(pipes[1]) then
                 gameState = 'gameover'
             end
+        -- end
+        if bird.x + (bird.width/2) > pipes[1].x + (PIPE_WIDTH/2) then
+            table.remove(pipes, 1)
+            table.insert(pipes, Pipe(pipes[#pipes].x + PIPE_WIDTH*2, 100, 60))
+            score:addCount(1)
         end
 
         bird:update(dt)
@@ -93,7 +104,19 @@ end
 function love.draw()
     push:start()
 
-    
+    renderGame()
+    if gameState == 'menu' then
+        renderMenu()
+    end
+    if gameState == 'gameover' then
+        renderGameOver()
+    end
+
+    displayFPS()
+    push:finish()
+end
+
+function renderGame()
     love.graphics.draw(imgBackground, -backgroundScroll, 0)
     love.graphics.draw(imgGround, -groundScroll, VIRTUAL_WINDOW_HEIGHT - 16)
 
@@ -101,8 +124,19 @@ function love.draw()
         pipe:render()
     end
     bird:render()
+    score:render()
+end
 
-    push:finish()
+function renderGameOver()
+    love.graphics.setFont(font.Xl)
+    love.graphics.setColor(255,255,255,255)
+    love.graphics.printf('Loser: '.. score:getScore(1), 0, 50, VIRTUAL_WINDOW_WIDTH, 'center')
+end
+
+function renderMenu()
+    love.graphics.setFont(font.Xl)
+    love.graphics.setColor(255,255,255,255)
+    love.graphics.printf('Press Enter to Start', 0, 50, VIRTUAL_WINDOW_WIDTH, 'center')
 end
 
 function love.keypressed(key)
@@ -111,7 +145,7 @@ function love.keypressed(key)
     end
     if key == 'enter' or key == 'return' then
         if gameState == 'gameover' then
-            startGame()
+            setupGame()
         end
         gameState = 'game'
     end
@@ -127,5 +161,5 @@ end
 function displayFPS()
     love.graphics.setFont(font.Sm)
     love.graphics.setColor(0,255,0,255)
-    love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()) .. " GS: " .. gameState..server, 10, 10)
+    love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()) .. " GS: " .. gameState, 10, 10)
 end

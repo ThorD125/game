@@ -7,7 +7,7 @@ function Scoreboard:init(amountOfPeople, x, y, width)
     self.scores = {}
     self.x = x
     self.y = y
-    self.width = width
+    self.width = width or 100
 
     self:reset()
 end
@@ -29,6 +29,10 @@ function Scoreboard:reset()
     for i = 1, self.amountOfPeople do
         self.scores[i] = 0
     end
+end
+
+function Scoreboard:getScore(player)
+    return self.scores[player]
 end
 
 function Scoreboard:checkWinner()

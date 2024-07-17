@@ -157,5 +157,5 @@ end
 function displayFPS()
     love.graphics.setFont(font.Sm)
     love.graphics.setColor(0,255,0,255)
-    love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()) .. " GS: " .. gameState..server, 10, 10)
+    love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()) .. " GS: " .. gameState, 10, 10)
 end

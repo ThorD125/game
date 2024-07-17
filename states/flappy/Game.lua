@@ -2,7 +2,9 @@
 Game = Class{__includes = BaseState}
 
 function Game:update(dt)
-
+    if love.keyboard.wasPressed("space") then
+        bird:jump()
+    end
 
     for i, pipe in pairs(pipes) do
         pipe:update(dt)

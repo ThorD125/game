@@ -83,6 +83,10 @@ function love.update(dt)
     backgroundScroll = (backgroundScroll + backgroundScrollSpeed * dt) % backgroundLoopingPoint
     groundScroll = (groundScroll + groundScrollSpeed * dt) % VIRTUAL_WINDOW_WIDTH
 
+    if love.keyboard.wasPressed('escape') then
+        love.event.quit()
+    end
+
     gStateMachine:update(dt)
 end
 
@@ -96,22 +100,4 @@ function love.draw()
 
     displayFPS()
     push:finish()
-end
-
-function love.keypressed(key)
-    if key == 'escape' then
-        love.event.quit()
-    end
-    if key == 'enter' or key == 'return' then
-        -- if gameState == 'gameover' then
-            resetGame()
-        -- end
-        gStateMachine:change('countdown', game)
-    end
-    -- if gameState == 'game' then
-        if key == "space" then
-            -- gStateMachine:change('game')
-            bird:jump()
-        end
-    -- end
 end

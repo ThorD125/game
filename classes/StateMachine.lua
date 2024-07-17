@@ -20,6 +20,8 @@ end
 
 function StateMachine:update(dt)
 	self.current:update(dt)
+
+    love.keyboard.keysPressed = {}
 end
 
 function StateMachine:render()

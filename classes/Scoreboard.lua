@@ -37,7 +37,7 @@ end
 
 function Scoreboard:checkWinner()
     for i, score in ipairs(self.scores) do
-        if score == X_TO_WIN then
+        if score == x_to_win then
             return i
         end
     end

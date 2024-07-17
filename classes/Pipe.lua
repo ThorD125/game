@@ -4,7 +4,7 @@ Pipe = Class{}
 function Pipe:init(x, y, gapHeight)
     self.x = x
     self.y = y
-    self.width = PIPE_WIDTH
+    self.width = pipe_width
     self.height = img_pipe:getHeight()
     self.gapHeight = gapHeight
 end

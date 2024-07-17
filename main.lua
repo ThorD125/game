@@ -20,6 +20,7 @@ sound['bg']:play()
 sound['bg']:setVolume(0.2)
 
 require 'utils.utils'
+require 'utils.colors'
 
 -- require 'pong'
 require 'flappy'

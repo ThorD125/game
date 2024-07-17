@@ -20,9 +20,9 @@ function Paddle:update(dt)
     if love.keyboard.isDown(self.keyUp) and love.keyboard.isDown(self.keyDown) then
         self.y = self.y
     elseif love.keyboard.isDown(self.keyUp) then
-        self.y = math.max(0, self.y - PADDLE_SPEED * dt)
+        self.y = math.max(0, self.y - paddle_speed * dt)
     elseif love.keyboard.isDown(self.keyDown) then
-        self.y = math.min(virtual_window_height - 20, self.y + PADDLE_SPEED * dt)
+        self.y = math.min(virtual_window_height - 20, self.y + paddle_speed * dt)
     end
 end
 

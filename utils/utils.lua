@@ -31,5 +31,5 @@ function love.keyboard.wasPressed(key)
 end
 
 function resetColor()
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(colors.white)
 end

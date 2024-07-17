@@ -22,9 +22,9 @@ function Game:update(dt)
         state_machine:change('gameover')
     end
 
-    if self.bird.x + (self.bird.width/2) > self.pipes[1].x + (PIPE_WIDTH/2) then
+    if self.bird.x + (self.bird.width/2) > self.pipes[1].x + (pipe_width/2) then
         table.remove(self.pipes, 1)
-        table.insert(self.pipes, Pipe(self.pipes[#self.pipes].x + PIPE_WIDTH*2, 100, 60))
+        table.insert(self.pipes, Pipe(self.pipes[#self.pipes].x + pipe_width*2, 100, 60))
         self.score:addCount(1)
         sound.collision:play()
     end
@@ -47,7 +47,7 @@ function Game:resetGame()
 
     for i = 1, pipe_amount do
         pipeFirstOffset = math.random(virtual_window_width/4,virtual_window_width - (virtual_window_width/4) - 60)
-        self.pipes[i] = Pipe((virtual_window_width/2) + 2 * i * PIPE_WIDTH, pipeFirstOffset, 60)
+        self.pipes[i] = Pipe((virtual_window_width/2) + 2 * i * pipe_width, pipeFirstOffset, 60)
     end
 
     self.bird = Bird(50, 100, 'space')

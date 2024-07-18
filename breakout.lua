@@ -1,19 +1,17 @@
 push = require 'libs.push.push'
 Class = require 'libs.hump.class'
 
+require 'constants.breakout'
 require 'classes.StateMachine'
 
 require 'classes.Scoreboard'
 
-require 'states.BaseState'
-require 'states.CountdownState'
+require 'states.Base'
+require 'states.Countdown'
 
-require 'states.breakout.start'
+require 'states.breakout.Start'
 
-window_width = 1280
-window_height = 720
-virtual_window_width = 512
-virtual_window_height = 288
+
 
 img = {
     ['arrows'] = love.graphics.newImage('assets/images/breakout/arrows.png'),
@@ -26,11 +24,6 @@ img = {
     ['ui'] = love.graphics.newImage('assets/images/breakout/ui.png'),
 }
 
-background_scroll = 0
-background_scroll_speed = 30
-ground_scroll = 0
-ground_scroll_speed = 60
-
 function love.load()
     love.window.setTitle('template')
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -42,10 +35,8 @@ function love.load()
         vsync = true
     })
 
-    game = Game()
-
     state_machine = StateMachine {
-        ['start'] = function() return Start() end,
+        ['start'] = function() return StartState() end,
         -- ['highscore'] = function() return HighScore() end,
         -- ['enterhighscore'] = function() return EnterHighScore() end,
         -- ['gameover'] = function() return Gameover() end,
@@ -68,8 +59,9 @@ end
 
 function love.draw()
     push:start()
-    love.graphics.draw(img.background, -background_scroll, 0)
-    
+
+    background_render(img.background)
+
     state_machine:render()
     
     push:finish()

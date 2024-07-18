@@ -1,30 +1,23 @@
 push = require 'libs.push.push'
 Class = require 'libs.hump.class'
 
+require 'constants.template'
+
 require 'classes.StateMachine'
 
 require 'classes.Scoreboard'
 
-require 'states.BaseState'
-require 'states.CountdownState'
+require 'states.Base'
+require 'states.Countdown'
 
 require 'states.Menu'
 require 'states.Game'
 require 'states.Gameover'
 
-window_width = 1280
-window_height = 720
-virtual_window_width = 512
-virtual_window_height = 288
 
 img = {
     ['background'] = love.graphics.newImage('assets/images/background.png'),
 }
-
-background_scroll = 0
-background_scroll_speed = 30
-ground_scroll = 0
-ground_scroll_speed = 60
 
 function love.load()
     love.window.setTitle('template')
@@ -37,13 +30,13 @@ function love.load()
         vsync = true
     })
 
-    game = Game()
+    game = GameState()
 
     state_machine = StateMachine {
-        ['menu'] = function() return Menu() end,
+        ['menu'] = function() return MenuState() end,
         ['countdown'] = function() return CountdownState() end,
         ['game'] = function() return game end,
-        ['gameover'] = function() return Gameover() end
+        ['gameover'] = function() return GameOverState() end
     }
     
     state_machine:change('menu')
@@ -59,7 +52,9 @@ end
 
 function love.draw()
     push:start()
-    love.graphics.draw(img.background, -background_scroll, 0)
+    
+
+    background_render(img.background)
     
     state_machine:render()
     

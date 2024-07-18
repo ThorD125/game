@@ -32,3 +32,11 @@ end
 function resetColor()
     love.graphics.setColor(colors.white)
 end
+
+function background_render(background)
+    local image_width = background:getWidth()
+    local image_height = background:getHeight()
+    local scale_x = virtual_window_width / image_width
+    local scale_y = virtual_window_height / image_height
+    love.graphics.draw(background, 0, 0, 0, scale_x, scale_y)
+end

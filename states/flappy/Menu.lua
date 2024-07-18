@@ -1,10 +1,10 @@
-Menu = Class{__includes = BaseState}
+MenuState = Class{__includes = BaseState}
 
-function Menu:render()
+function MenuState:render()
     renderHugeText('Press Enter to Start')
 end
 
-function Menu:update(dt)
+function MenuState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         game:reset()
         state_machine:change('countdown')

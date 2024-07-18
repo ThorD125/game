@@ -7,8 +7,8 @@ require 'classes.Pipe'
 require 'classes.Bird'
 require 'classes.Scoreboard'
 
-require 'states.BaseState'
-require 'states.CountdownState'
+require 'states.Base'
+require 'states.Countdown'
 
 require 'states.flappy.Menu'
 require 'states.flappy.Game'
@@ -51,13 +51,13 @@ function love.load()
         vsync = true
     })
 
-    game = Game()
+    game = GameState()
 
     state_machine = StateMachine {
-        ['menu'] = function() return Menu() end,
+        ['menu'] = function() return MenuState() end,
         ['countdown'] = function() return CountdownState() end,
         ['game'] = function() return game end,
-        ['gameover'] = function() return Gameover() end
+        ['gameover'] = function() return GameOverState() end
 
     }
     

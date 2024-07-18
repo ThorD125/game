@@ -1,15 +1,7 @@
-push = require 'libs.push.push'
-Class = require 'libs.hump.class'
 
-require 'constants.template'
-
-require 'classes.StateMachine'
+require 'dependencies.template'
 
 require 'classes.Scoreboard'
-
-require 'states.Base'
-require 'states.Countdown'
-
 require 'states.Menu'
 require 'states.Game'
 require 'states.Gameover'
@@ -54,7 +46,7 @@ function love.draw()
     push:start()
     
 
-    background_render(img.background)
+    backgroundRender(img.background)
     
     state_machine:render()
     

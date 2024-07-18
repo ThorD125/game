@@ -1,17 +1,17 @@
 Template = Class{}
 
 function Template:init(x, y, width, height)
-    self.resetX = x
-    self.resetY = y
-    self.x = x
-    self.y = y
+    self.reset_x = x
+    self.reset_y = y
+    self.x = self.reset_x
+    self.y = self.reset_y
     self.width = width
     self.height = height
 end
 
 function Template:reset()
-    self.x = self.resetX
-    self.y = self.resetY
+    self.x = self.reset_x
+    self.y = self.reset_y
 end
 
 function Template:update(dt)

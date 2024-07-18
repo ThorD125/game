@@ -8,15 +8,14 @@ function displayFPS()
     love.graphics.setFont(font.Sm)
     love.graphics.setColor(0,255,0,255)
     love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
+    love.graphics.print('State: ' .. state_machine:getCurrentState(), 10, 20)
+
+    state_machine:getCurrentState()
     resetColor()
 end
 
 function love.keypressed(key)
     love.keyboard.keysPressed[key] = true
-    
-    if key == 'escape' then
-        love.event.quit()
-    end
 end
 
 love.keyboard.keysPressed = {}
@@ -33,10 +32,10 @@ function resetColor()
     love.graphics.setColor(colors.white)
 end
 
-function background_render(background)
+function backgroundRender(background)
     local image_width = background:getWidth()
     local image_height = background:getHeight()
-    local scale_x = virtual_window_width / image_width
-    local scale_y = virtual_window_height / image_height
+    local scale_x = virtual_window_width / (image_width -1)
+    local scale_y = virtual_window_height / (image_height -1)
     love.graphics.draw(background, 0, 0, 0, scale_x, scale_y)
 end

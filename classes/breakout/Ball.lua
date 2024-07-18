@@ -42,11 +42,6 @@ function Ball:update(dt)
         self.y = 0
         self.dy = -self.dy
     end
-
-    if self.y >= virtual_window_height - 8 then
-        self.y = virtual_window_height - 8
-        self.dy = -self.dy
-    end
 end
 
 function Ball:render()

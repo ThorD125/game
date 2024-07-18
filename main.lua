@@ -12,39 +12,39 @@ font = {
 sound = {
     ['collision']=love.audio.newSource('assets/sound/collision.wav', 'stream'),
     ['laser']=love.audio.newSource('assets/sound/laser.wav', 'stream'),
-    ['bg']=love.audio.newSource('assets/sound/backgroound.mp3', 'stream'),
+    ['background']=love.audio.newSource('assets/sound/backgroound.mp3', 'stream'),
 }
 
-sound['bg']:setLooping(true)
-sound['bg']:play()
-sound['bg']:setVolume(0.2)
+sound.background:setLooping(true)
+sound.background:play()
+sound.background:setVolume(0.2)
 
 require 'utils.utils'
 require 'utils.colors'
 
--- 01
+-- 00
 -- require 'pong'
--- 02
+-- 01
 -- require 'flappy'
--- 03
+-- 02
 require 'breakout'
--- 04
+-- 03
 -- require 'match'
--- 05
+-- 04
 -- require 'mario'
--- 06
+-- 05
 -- require 'zelda'
--- 07
+-- 06
 -- require 'angry'
--- 08
+-- 07
 -- require 'pokemon'
--- 09
+-- 08
 -- require 'unity'
--- 10
+-- 09
 -- require 'dreadhall'
--- 11
+-- 10
 -- require 'portal'
--- 12
+-- 11
 -- require 'valve'
 
 -- require 'rpg'

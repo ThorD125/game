@@ -19,10 +19,12 @@ window_height = 720
 virtual_window_width = 512
 virtual_window_height = 288
 
-img_background = love.graphics.newImage('assets/images/flappy/bg.png')
-img_ground = love.graphics.newImage('assets/images/flappy/gr.png')
-img_pipe = love.graphics.newImage('assets/images/flappy/pipe.png') 
-img_bird = love.graphics.newImage('assets/images/flappy/bird.png') 
+img = {
+    ['background'] = love.graphics.newImage('assets/images/flappy/background.png'),
+    ['ground'] = love.graphics.newImage('assets/images/flappy/ground.png'),
+    ['pipe'] = love.graphics.newImage('assets/images/flappy/pipe.png') ,
+    ['bird'] = love.graphics.newImage('assets/images/flappy/bird.png') ,
+}
 
 background_scroll = 0
 background_scroll_speed = 30
@@ -35,8 +37,8 @@ pipe_speed = 40
 gravity = 20
 pipe_first_offset = 60
 
-pipe_amount = (virtual_window_width / 2) / img_pipe:getWidth() + 2
-pipe_width = img_pipe:getWidth()
+pipe_amount = (virtual_window_width / 2) / ['pipe']:getWidth() + 2,
+pipe_width = img.pipe:getWidth()
 
 function love.load()
     love.window.setTitle('flapper')
@@ -75,10 +77,10 @@ end
 
 function love.draw()
     push:start()
-    love.graphics.draw(img_background, -background_scroll, 0)
+    love.graphics.draw(img.background, -background_scroll, 0)
     
     state_machine:render()
     
-    love.graphics.draw(img_ground, -ground_scroll, virtual_window_height - 16)
+    love.graphics.draw(img.ground, -ground_scroll, virtual_window_height - 16)
     push:finish()
 end

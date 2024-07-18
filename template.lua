@@ -17,7 +17,9 @@ window_height = 720
 virtual_window_width = 512
 virtual_window_height = 288
 
-img_background = love.graphics.newImage('assets/images/background.png')
+img = {
+    ['background'] = love.graphics.newImage('assets/images/background.png'),
+}
 
 background_scroll = 0
 background_scroll_speed = 30
@@ -57,7 +59,7 @@ end
 
 function love.draw()
     push:start()
-    love.graphics.draw(img_background, -background_scroll, 0)
+    love.graphics.draw(img.background, -background_scroll, 0)
     
     state_machine:render()
     

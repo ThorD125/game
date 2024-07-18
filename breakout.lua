@@ -8,16 +8,23 @@ require 'classes.Scoreboard'
 require 'states.BaseState'
 require 'states.CountdownState'
 
-require 'states.Menu'
-require 'states.Game'
-require 'states.Gameover'
+require 'states.breakout.start'
 
 window_width = 1280
 window_height = 720
 virtual_window_width = 512
 virtual_window_height = 288
 
-img_background = love.graphics.newImage('assets/images/background.png')
+img = {
+    ['arrows'] = love.graphics.newImage('assets/images/breakout/arrows.png'),
+    ['background'] = love.graphics.newImage('assets/images/breakout/background.png'),
+    ['blocks'] = love.graphics.newImage('assets/images/breakout/blocks.png'),
+    ['breakout'] = love.graphics.newImage('assets/images/breakout/breakout.png'),
+    ['main'] = love.graphics.newImage('assets/images/breakout/breakout.png'),
+    ['hearts'] = love.graphics.newImage('assets/images/breakout/hearts.png'),
+    ['particle'] = love.graphics.newImage('assets/images/breakout/particle.png'),
+    ['ui'] = love.graphics.newImage('assets/images/breakout/ui.png'),
+}
 
 background_scroll = 0
 background_scroll_speed = 30
@@ -38,13 +45,17 @@ function love.load()
     game = Game()
 
     state_machine = StateMachine {
-        ['menu'] = function() return Menu() end,
-        ['countdown'] = function() return CountdownState() end,
-        ['game'] = function() return game end,
-        ['gameover'] = function() return Gameover() end
+        ['start'] = function() return Start() end,
+        -- ['highscore'] = function() return HighScore() end,
+        -- ['enterhighscore'] = function() return EnterHighScore() end,
+        -- ['gameover'] = function() return Gameover() end,
+        -- ['game'] = function() return game end,
+        -- ['paddleselect'] = function() return PaddleSelect() end,
+        -- ['serve'] = function() return Serve() end,
+        -- ['victory'] = function() return Victory() end
     }
     
-    state_machine:change('menu')
+    state_machine:change('start')
 end
 
 function love.update(dt)
@@ -57,7 +68,7 @@ end
 
 function love.draw()
     push:start()
-    love.graphics.draw(img_background, -background_scroll, 0)
+    love.graphics.draw(img.background, -background_scroll, 0)
     
     state_machine:render()
     

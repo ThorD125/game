@@ -1,7 +1,6 @@
 CountdownState = Class{__includes = BaseState}
 
-function CountdownState:init(nextstate, x, y, countNumbers, countTime)
-    self.nextstate = nextstate or "game"
+function CountdownState:init(x, y, countNumbers, countTime)
     self.x = x or 0
     self.y = y or 120
     self.count = countNumbers or 3

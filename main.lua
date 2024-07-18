@@ -27,7 +27,7 @@ require 'utils.colors'
 -- 02
 -- require 'flappy'
 -- 03
--- require 'breakout'
+require 'breakout'
 -- 04
 -- require 'match'
 -- 05
@@ -48,7 +48,7 @@ require 'utils.colors'
 -- require 'valve'
 
 -- require 'rpg'
-require 'template'
+-- require 'template'
 
 function love.resize(w, h)
     push:resize(w, h)

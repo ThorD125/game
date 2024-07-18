@@ -2,8 +2,7 @@
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init()
-    self.paddle = Paddle()
-    self.paused = false
+    self:reset()
 end
 
 function PlayState:update(dt)
@@ -20,14 +19,13 @@ function PlayState:update(dt)
         return
     end
     
-    
-
-
     self.paddle:update(dt)
+    self.ball:update(dt)
 end
 
 function PlayState:render()
     self.paddle:render()
+    self.ball:render()
 
     if self.paused then
        renderHugeText('Paused: '.. tostring(self.paused))
@@ -36,4 +34,11 @@ end
 
 
 function PlayState:reset()
+    self.paddle = Paddle()
+    self.ball = Ball()
+
+    self.ball.dx = math.random(-200, 200)
+    self.ball.dy = math.random(-50, -60)
+
+    self.paused = false
 end

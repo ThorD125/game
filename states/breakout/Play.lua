@@ -5,6 +5,8 @@ function PlayState:init()
     self:reset()
 end
 
+DEBUG = true
+
 function PlayState:update(dt)
     if self.paused then
         if love.keyboard.wasPressed('space') then
@@ -38,14 +40,53 @@ function PlayState:update(dt)
 
     self.paddle:update(dt)
     self.ball:update(dt)
+
+    local bricksCount = 0
+
+    for k, brick in pairs(self.bricks) do
+        brick:update(dt)
+
+        if brick.inPlay then
+            bricksCount = bricksCount + 1
+            if self.ball:collides(brick) then
+                brick:hit()
+
+                if self.ball.x + 2 < brick.x and self.ball.dx > 0 then
+                    self.ball.dx = -self.ball.dx
+                    self.ball.x = brick.x - 8
+                elseif self.ball.x + 6 > brick.x + brick.width and self.ball.dx < 0 then
+                    self.ball.dx = -self.ball.dx
+                    self.ball.x = brick.x + 32
+                elseif self.ball.y < brick.y then
+                    self.ball.dy = -self.ball.dy
+                    self.ball.y = brick.y - 8
+                else
+                    self.ball.dy = -self.ball.dy
+                    self.ball.y = brick.y + 16
+                end
+            end
+        end
+    end
+
+    if bricksCount == 0 then
+        self:reset()
+    end
+
 end
 
 function PlayState:render()
+    for k, brick in pairs(self.bricks) do
+        brick:render()
+        
+        love.graphics.print('stuff: ' .. brick.tier .. " ".. brick.color, 10, 30)
+    end
+
     self.paddle:render()
     self.ball:render()
 
     if self.paused then
-       renderHugeText('Paused: '.. tostring(self.paused))
+    --    renderHugeText('Paused: '.. tostring(self.paused))
+       renderHugeText('Paused')
     end
 end
 
@@ -57,5 +98,12 @@ function PlayState:reset()
     self.ball.dx = math.random(-200, 200)
     self.ball.dy = math.random(-50, -60)
 
+    if DEBUG then
+        self.ball.dx = 1
+        self.ball.dy = 200
+    end
+
     self.paused = false
+
+    self.bricks = LevelMaker.createMap()
 end

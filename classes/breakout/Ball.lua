@@ -45,7 +45,7 @@ function Ball:update(dt)
 end
 
 function Ball:render()
-    love.graphics.draw(img['breakout'], frames['balls'][self.skin], self.x, self.y)
+    love.graphics.draw(img.breakout, frames.balls[self.skin], self.x, self.y)
 end
 
 function Ball:collides(target)

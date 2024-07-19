@@ -1,6 +1,10 @@
 function renderHugeText(text, x, y)
     love.graphics.setFont(font.Xl)
-    love.graphics.printf(text, x or 0, y or 50, virtual_window_width, 'center')
+    if x == nil then
+        x = 0
+    end
+    textwidth = virtual_window_width - (2*x)
+    love.graphics.printf(text, x or 0, y or 50, textwidth, 'center')
     resetColor()
 end
 

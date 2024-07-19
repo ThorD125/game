@@ -1,51 +1,69 @@
 GameState = Class{__includes = BaseState}
 
+function GameState:init()
+    self.player1 = Paddle(10, virtual_window_height / 2 - 10, 5, 20, 'w', 's')
+    self.player2 = Paddle(virtual_window_width - 10, virtual_window_height / 2 - 10, 5, 20, 'up', 'down')
+    self.server = 1
+    self.ball = Ball(virtual_window_width / 2, virtual_window_height / 2, 5, 5)
+    self.score = Scoreboard(2, virtual_window_width / 2 - 50, virtual_window_height / 3, 50)
+end
+
 function GameState:update(dt)
-    ball:update(dt)
+    
+    self.player1:update(dt)
+    self.player2:update(dt)
+    self.ball:update(dt)
 
-    if ball:collides(player1) then
-        ball.dx = -ball.dx * 1.03
-        ball.x = player1.x + 5
+    if self.ball:collides(self.player1) then
+        self.ball.dx = -self.ball.dx * 1.03
+        self.ball.x = self.player1.x + 5
 
-        if ball.dy < 0 then
-            ball.dy = -math.random(10, 150)
+        if self.ball.dy < 0 then
+            self.ball.dy = -math.random(10, 150)
         else
-            ball.dy = math.random(10, 150)
+            self.ball.dy = math.random(10, 150)
         end
     end
 
-    if ball:collides(player2) then
-        ball.dx = -ball.dx * 1.03
-        ball.x = player2.x - 4
+    if self.ball:collides(self.player2) then
+        self.ball.dx = -self.ball.dx * 1.03
+        self.ball.x = self.player2.x - 4
 
-        if ball.dy < 0 then
-            ball.dy = -math.random(10, 150)
+        if self.ball.dy < 0 then
+            self.ball.dy = -math.random(10, 150)
         else
-            ball.dy = math.random(10, 150)
+            self.ball.dy = math.random(10, 150)
         end
     end
 
-    if ball.x < 0 then
-        score:addCount(2)
-        ball:reset()
-        server = 2
+    if self.ball.x < 0 then
+        self.score:addCount(2)
+        self.ball:reset()
+        self.server = 2
             state_machine:change("gameover")
-    elseif ball.x > virtual_window_width then
-        score:addCount(1)
-        ball:reset()
-        server = 1
+    elseif self.ball.x > virtual_window_width then
+        self.score:addCount(1)
+        self.ball:reset()
+        self.server = 1
             state_machine:change("gameover")
     end
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then    
         state_machine:change("menu")
-        score:reset()
-        ball:reset()
+        self.score:reset()
+        self.ball:reset()
     end
 end
 
 function GameState:render()
-    player1:render()
-    player2:render()
-    ball:render()
+    self.player1:render()
+    self.player2:render()
+    self.ball:render()
+    self.score:render()
+end
+
+function GameState:reset()
+    self.player1:reset()
+    self.player2:reset()
+    self.ball:reset()
 end

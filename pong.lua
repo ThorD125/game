@@ -11,15 +11,11 @@ function love.load()
         vsync = true
     })
 
-    player1 = Paddle(10, virtual_window_height / 2 - 10, 5, 20, 'w', 's')
-    player2 = Paddle(virtual_window_width - 10, virtual_window_height / 2 - 10, 5, 20, 'up', 'down')
-    server = 1
-    ball = Ball(virtual_window_width / 2, virtual_window_height / 2, 5, 5)
-    score = Scoreboard(2, virtual_window_width / 2 - 50, virtual_window_height / 3, 50)
+    game = GameState()
 
     state_machine = StateMachine {
         ['menu'] = function() return MenuState() end,
-        ['game'] = function() return GameState() end,
+        ['game'] = function() return game end,
         ['serve'] = function() return ServeState() end,
         ['gameover'] = function() return GameOverState() end,
         ['winner'] = function() return WinState() end,
@@ -29,13 +25,11 @@ function love.load()
 end
 
 function love.update(dt)
-    state_machine:update(dt)
-    player1:update(dt)
-    player2:update(dt)
-    
     if love.keyboard.wasPressed("escape") then
         love.event.quit()
     end
+
+    state_machine:update(dt)
 end
 
 
@@ -44,7 +38,6 @@ function love.draw()
     push:start()
     
     state_machine:render()
-    score:render()
 
     push:finish()
 end

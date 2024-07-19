@@ -1,3 +1,5 @@
+require 'constants.pong'
+
 require 'classes.pong.Ball'
 require 'classes.pong.Paddle'
 

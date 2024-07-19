@@ -9,10 +9,6 @@ require 'classes.example_cube'
 require 'utils.utils'
 
 
-img = {
-    ['background'] = love.graphics.newImage('assets/images/background.png'),
-}
-
 function love.load()
     love.window.setTitle('template')
     love.graphics.setDefaultFilter('nearest', 'nearest')

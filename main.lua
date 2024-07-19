@@ -11,6 +11,11 @@ font = {
     [size[4]] = love.graphics.newFont("assets/font/pokemon.ttf", 32)
 }
 
+img_main = {
+    ['background'] = love.graphics.newImage('assets/images/background.png'),
+    ['hearts'] = love.graphics.newImage('assets/images/hearts.png'),
+}
+
 sound = {
     ['collision']=love.audio.newSource('assets/sound/collision.wav', 'stream'),
     ['laser']=love.audio.newSource('assets/sound/laser.wav', 'stream'),

@@ -8,6 +8,7 @@ require 'utils.colors'
 
 require 'classes.StateMachine'
 require 'classes.Scoreboard'
+require 'classes.HealthBar'
 
 
 require 'states.Base'

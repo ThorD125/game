@@ -2,21 +2,25 @@ StartState = Class{__includes = BaseState}
 
 local highlighted = 1
 
+testHeart = HealthBar(1, 3, 7000, 7000, img_main.hearts)
+
 function StartState:render()
     love.graphics.setColor(colors.white)
-    renderHugeText('Breakout', 0, 50)
+    renderHugeText('Breakout', size[4], 0, 50)
 
     if highlighted == 1 then
         love.graphics.setColor(colors.blue)
     end
-    renderHugeText('START', 0, 150)
+    renderHugeText('START', size[3], 0, 150)
     resetColor()
     
     if highlighted == 2 then
         love.graphics.setColor(colors.blue)
     end
-    renderHugeText('HIGHSCORE', 0, 175)
+    renderHugeText('HIGHSCORE', size[3], 0, 175)
     resetColor()
+
+    testHeart:render()
 end
 
 function StartState:update(dt)    
@@ -35,4 +39,12 @@ function StartState:update(dt)
             state_machine:change('highscore')
         end
     end
+
+    if love.keyboard.wasPressed('x') then
+        testHeart:loseHeart()
+    end
+    if love.keyboard.wasPressed('y') then
+        testHeart:healHeart()
+    end
+    -- testHeart:update(dt)
 end

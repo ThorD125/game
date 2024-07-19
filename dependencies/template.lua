@@ -4,6 +4,7 @@ Class = require 'libs.hump.class'
 require 'constants.template'
 
 require 'classes.StateMachine'
+require 'classes.Scoreboard'
 
 
 require 'states.Base'

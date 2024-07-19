@@ -23,9 +23,9 @@ require 'utils.utils'
 require 'utils.colors'
 
 -- 00
--- require 'pong'
+require 'pong'
 -- 01
-require 'flappy'
+-- require 'flappy'
 -- 02
 -- require 'breakout'
 -- 03

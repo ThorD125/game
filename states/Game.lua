@@ -3,17 +3,16 @@ GameState = Class{__includes = BaseState}
 
 function GameState:init()
     GameState:reset()
+
+    self.movingObject = ExampleCube()
 end
 
 function GameState:update(dt)
-    if love.keyboard.wasPressed("space") then
-        state_machine:change("gameover")
-    end
+    self.movingObject:update(dt)
 end
 
 function GameState:render()
-    love.graphics.setColor(1, 0, 0, 255)
-    love.graphics.rectangle('fill', 100, 100, 100, 100)
+    self.movingObject:render()
 end
 
 

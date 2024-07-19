@@ -1,6 +1,8 @@
 -- function love.draw()
 --     love.graphics.print("Hello World", 400, 300)
 -- end
+require 'dependencies.template'
+
 size = { "sm", "l", "xl", "xxl"}
 font = {
     [size[1]] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
@@ -19,13 +21,12 @@ sound.background:setLooping(true)
 sound.background:play()
 sound.background:setVolume(0.2)
 
-require 'dependencies.template'
 -- 00
-require 'pong'
+-- require 'pong'
 -- 01
 -- require 'flappy'
 -- 02
--- require 'breakout'
+require 'breakout'
 -- 03
 -- require 'match'
 -- 04

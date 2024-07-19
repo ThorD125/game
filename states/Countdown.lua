@@ -8,6 +8,10 @@ function CountdownState:init(x, y, countNumbers, countTime)
     self.COUNTDOWN_TIME = countTime or 0.75
 end
 
+function CountdownState:enter(params)
+    self.nextstate = params.nextstate
+end
+
 function CountdownState:update(dt)
     self.timer = self.timer + dt
 
@@ -16,9 +20,7 @@ function CountdownState:update(dt)
         self.count = self.count - 1
 
         if self.count == 0 then
-            state_machine:change("game")
-            -- renderHugeText(self.nextstate, size[4])
-            -- stateMachine:change(self.nextstate)
+            state_machine:change(self.nextstate)
         end
     end
 end

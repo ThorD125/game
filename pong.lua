@@ -1,4 +1,3 @@
-require 'dependencies.template'
 require 'dependencies.pong'
 
 function love.load()
@@ -19,19 +18,17 @@ function love.load()
     score = Scoreboard(2, virtual_window_width / 2 - 50, virtual_window_height / 3, 50)
 
     state_machine = StateMachine {
+        ['menu'] = function() return MenuState() end,
         ['game'] = function() return GameState() end,
         ['serve'] = function() return ServeState() end,
-        ['menu'] = function() return MenuState() end,
         ['gameover'] = function() return GameOverState() end,
         ['winner'] = function() return WinState() end,
     }
     
-
     state_machine:change("menu")
 end
 
 function love.update(dt)
-
     state_machine:update(dt)
     player1:update(dt)
     player2:update(dt)

@@ -1,7 +1,6 @@
 
 require 'dependencies.template'
 
-require 'classes.Scoreboard'
 require 'states.Menu'
 require 'states.Game'
 require 'states.Gameover'

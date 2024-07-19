@@ -19,9 +19,7 @@ sound.background:setLooping(true)
 sound.background:play()
 sound.background:setVolume(0.2)
 
-require 'utils.utils'
-require 'utils.colors'
-
+require 'dependencies.template'
 -- 00
 require 'pong'
 -- 01

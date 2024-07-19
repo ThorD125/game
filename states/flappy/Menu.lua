@@ -1,7 +1,7 @@
 MenuState = Class{__includes = BaseState}
 
 function MenuState:render()
-    renderHugeText('Press Enter to Start')
+    renderHugeText('Press Enter to Start', size[3])
 end
 
 function MenuState:update(dt)

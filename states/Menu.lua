@@ -2,7 +2,7 @@ MenuState = Class{__includes = BaseState}
 
 function MenuState:render()
     love.graphics.setColor(colors.black)
-    renderHugeText('Press Enter to Start')
+    renderHugeText('Press Enter to Start', size[1])
 end
 
 function MenuState:update(dt)

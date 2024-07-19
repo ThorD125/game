@@ -3,6 +3,8 @@ PlayState = Class{__includes = BaseState}
 
 function PlayState:init()
     self:reset()
+
+    score = 0
 end
 
 DEBUG = true
@@ -34,7 +36,11 @@ function PlayState:update(dt)
     end
 
     if self.ball.y >= virtual_window_height then
-        -- lose one 
+        if high_score:append(score) then
+            state_machine:change('highscore')
+        else
+            state_machine:change('gameover')
+        end
     end
 
 
@@ -78,8 +84,8 @@ function PlayState:render()
     for k, brick in pairs(self.bricks) do
         brick:render()
         
-        love.graphics.print('stuff: ' .. brick.tier .. " ".. brick.color, 10, 30)
     end
+    love.graphics.print('Score: ' .. score, 10, 30)
 
     self.paddle:render()
     self.ball:render()

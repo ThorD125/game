@@ -1,12 +1,12 @@
 -- function love.draw()
 --     love.graphics.print("Hello World", 400, 300)
 -- end
-
+size = { "sm", "l", "xl", "xxl"}
 font = {
-    ['Sm'] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
-    ['l'] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
-    ['Xl'] = love.graphics.newFont("assets/font/pokemon.ttf", 16),
-    ['XXl'] = love.graphics.newFont("assets/font/pokemon.ttf", 32)
+    [size[1]] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
+    [size[2]] = love.graphics.newFont("assets/font/pokemon.ttf", 8),
+    [size[3]] = love.graphics.newFont("assets/font/pokemon.ttf", 16),
+    [size[4]] = love.graphics.newFont("assets/font/pokemon.ttf", 32)
 }
 
 sound = {
@@ -25,9 +25,9 @@ require 'utils.colors'
 -- 00
 -- require 'pong'
 -- 01
--- require 'flappy'
+require 'flappy'
 -- 02
-require 'breakout'
+-- require 'breakout'
 -- 03
 -- require 'match'
 -- 04

@@ -3,8 +3,8 @@ Class = require 'libs.hump.class'
 
 require 'classes.StateMachine'
 
-require 'classes.Pipe'
-require 'classes.Bird'
+require 'classes.flappy.Pipe'
+require 'classes.flappy.Bird'
 require 'classes.Scoreboard'
 
 require 'states.Base'
@@ -37,7 +37,7 @@ pipe_speed = 40
 gravity = 20
 pipe_first_offset = 60
 
-pipe_amount = (virtual_window_width / 2) / ['pipe']:getWidth() + 2,
+pipe_amount = (virtual_window_width / 2) / img['pipe']:getWidth() + 2
 pipe_width = img.pipe:getWidth()
 
 function love.load()

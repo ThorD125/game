@@ -1,7 +1,7 @@
 GameOverState = Class{__includes = BaseState}
 
 function GameOverState:render()
-    renderHugeText('Loser: '.. game.score:getScore(1))
+    renderHugeText('Loser: '.. game.score:getScore(1), size[3])
 end
 
 function GameOverState:update(dt)

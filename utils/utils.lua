@@ -1,5 +1,5 @@
-function renderHugeText(text, x, y)
-    love.graphics.setFont(font.Xl)
+function renderHugeText(text, size, x, y)
+    love.graphics.setFont(font[size])
     if x == nil then
         x = 0
     end
@@ -9,7 +9,7 @@ function renderHugeText(text, x, y)
 end
 
 function displayFPS()
-    love.graphics.setFont(font.Sm)
+    love.graphics.setFont(font[size[1]])
     love.graphics.setColor(0,255,0,255)
     love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
     love.graphics.print('State: ' .. state_machine:getCurrentState(), 10, 20)

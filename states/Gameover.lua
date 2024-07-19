@@ -2,7 +2,7 @@ GameOverState = Class{__includes = BaseState}
 
 function GameOverState:render()
     love.graphics.setColor(colors.black)
-    renderHugeText('Loser: '.. game.score:getScore(1))
+    renderHugeText('Loser: '.. game.score:getScore(1), size[4])
 end
 
 function GameOverState:update(dt)

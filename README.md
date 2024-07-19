@@ -13,3 +13,5 @@ gitrepo for each lesson https://github.com/games50
 <!-- 
 https://www.youtube.com/watch?v=pGpn2YMXtdg&list=PLWKjhJtqVAbluXJKKbCIb4xd7fcRkpzoz&index=3
 -->
+
+git submodule update --init --remote --recursive

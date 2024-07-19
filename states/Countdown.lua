@@ -17,14 +17,13 @@ function CountdownState:update(dt)
 
         if self.count == 0 then
             state_machine:change("game")
-            -- renderHugeText(self.nextstate)
+            -- renderHugeText(self.nextstate, size[4])
             -- stateMachine:change(self.nextstate)
         end
     end
 end
 
 function CountdownState:render()
-    love.graphics.setFont(font['XXl'])
     love.graphics.setColor(colors.black)
-    renderHugeText(tostring(self.count))
+    renderHugeText(tostring(self.count), size[4])
 end

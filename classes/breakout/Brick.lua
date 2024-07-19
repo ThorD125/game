@@ -6,10 +6,11 @@ function Brick:init(x, y)
     self.width = 32
     self.height = 16
 
-    self.tier = math.random(1,4)
-    self.color = math.random(1,4)
+    self.tier = math.random(0,3)
+    self.color = math.random(0,3)
     if DEBUG then
         self.tier = 1
+        self.color = 1
     end
 
     self.inPlay = true
@@ -33,6 +34,7 @@ function Brick:render()
 end
 
 function Brick:hit()
+    score = score + 1
     if self.tier > 0 then
         self.tier = self.tier - 1
     else

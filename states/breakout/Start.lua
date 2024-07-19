@@ -32,7 +32,7 @@ function StartState:update(dt)
         if highlighted == 1 then
             state_machine:change('play')
         elseif highlighted == 2 then
-            -- state_machine:change('highscore')
+            state_machine:change('highscore')
         end
     end
 end

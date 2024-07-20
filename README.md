@@ -11,7 +11,7 @@ followed these lessons: https://www.youtube.com/playlist?list=PLWKjhJtqVAbluXJKK
 gitrepo for each lesson https://github.com/games50
 
 <!-- 
-https://www.youtube.com/watch?v=pGpn2YMXtdg&list=PLWKjhJtqVAbluXJKKbCIb4xd7fcRkpzoz&index=3
+https://youtu.be/pGpn2YMXtdg?list=PLWKjhJtqVAbluXJKKbCIb4xd7fcRkpzoz&t=4845
 -->
 
 git submodule update --init --remote --recursive

@@ -22,9 +22,9 @@ sound = {
     ['background']=love.audio.newSource('assets/sound/backgroound.mp3', 'stream'),
 }
 
-sound.background:setLooping(true)
-sound.background:play()
-sound.background:setVolume(0.2)
+-- sound.background:setLooping(true)
+-- sound.background:play()
+-- sound.background:setVolume(0.2)
 
 -- 00
 -- require 'pong'

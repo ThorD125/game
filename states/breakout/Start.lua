@@ -2,7 +2,7 @@ StartState = Class{__includes = BaseState}
 
 local highlighted = 1
 
-testHeart = HealthBar(1, 3, 7000, 7000, img_main.hearts)
+testHeart = HealthBar_Minecraft(5, 10, 7000, 7000)
 
 function StartState:render()
     love.graphics.setColor(colors.white)

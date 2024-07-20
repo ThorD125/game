@@ -1,6 +1,4 @@
-Scoreboard = Class{}
-
-
+Scoreboard = Class{__includes = BaseState}
 
 function Scoreboard:init(amountOfPeople, x, y, width)
     self.amountOfPeople = amountOfPeople

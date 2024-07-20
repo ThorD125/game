@@ -9,6 +9,7 @@ require 'utils.colors'
 require 'classes.StateMachine'
 require 'classes.Scoreboard'
 require 'classes.HealthBar_Minecraft'
+require 'classes.Menu'
 
 
 require 'states.Base'

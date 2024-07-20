@@ -1,4 +1,4 @@
-HealthBar_Minecraft = Class{}
+HealthBar_Minecraft = Class{__includes = BaseState}
 
 function HealthBar_Minecraft:init(current_hearts, hearts_max, x, y)
     self.reset_current_hearts = current_hearts*2
@@ -12,12 +12,20 @@ function HealthBar_Minecraft:init(current_hearts, hearts_max, x, y)
     self:reset()
 end
 
+function HealthBar_Minecraft:update(dt) 
+    -- if love.keyboard.wasPressed('g') then
+    --     self:loseHeart()
+    -- elseif love.keyboard.wasPressed('h') then
+    --     self:healHeart()
+    -- end
+end
+
 function HealthBar_Minecraft:loseHeart()
-    self.hearts = self.current_hearts - 1
+    self.current_hearts = self.current_hearts - 1
 end
 
 function HealthBar_Minecraft:healHeart()
-    self.hearts = self.current_hearts + 1
+    self.current_hearts = self.current_hearts + 1
 end
 
 function HealthBar_Minecraft:render(dt)
@@ -53,10 +61,10 @@ function HealthBar_Minecraft:reset()
         self.y = virtual_window_height - self.height
     end
 
-    self.quads = GenerateHalfHearthQuads(img_main.hearts)
+    self.quads = self.GenerateHalfHearthQuads(img_main.hearts)
 end
 
-function GenerateHalfHearthQuads(atlas)
+function HealthBar_Minecraft:GenerateHalfHearthQuads(atlas)
     local counter = 1
     local quads = {}
 

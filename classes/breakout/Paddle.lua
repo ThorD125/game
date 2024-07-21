@@ -1,4 +1,4 @@
-Paddle = Class{}
+Paddle = Class{__includes = BaseState}
 
 function Paddle:init()
     self.reset_x = virtual_window_width / 2 - 32

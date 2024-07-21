@@ -1,4 +1,4 @@
-Brick = Class{}
+Brick = Class{__includes = BaseState}
 
 function Brick:init(x, y)
     self.x = x

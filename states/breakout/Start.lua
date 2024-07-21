@@ -5,7 +5,8 @@ local highlighted = 1
 testHeart = HealthBar_Minecraft(5, 10, 7000, 7000)
 
 function StartState:init()
-    menu = Menu({
+    menu = Menu("Breakout",
+        {
         {'START','play'},
         {'HIGHSCORE','highscore'},
     })

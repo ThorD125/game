@@ -1,4 +1,4 @@
-Ball = Class{}
+Ball = Class{__includes = BaseState}
 
 function Ball:init(skin)
     self.reset_x = virtual_window_width / 2 - 2

@@ -1,4 +1,4 @@
-LevelMaker = Class{}
+LevelMaker = Class{__includes = BaseState}
 
 function LevelMaker:createMap()
     local bricks = {}

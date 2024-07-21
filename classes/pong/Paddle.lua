@@ -1,4 +1,4 @@
-Paddle = Class{}
+Paddle = Class{__includes = BaseState}
 
 function Paddle:init(x, y, width, height, keyUp, keyDown)
     self.resetX = x

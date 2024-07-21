@@ -1,4 +1,4 @@
-Ball = Class{}
+Ball = Class{__includes = BaseState}
 
 function Ball:init(x, y, width, height)
     self.resetX = x

@@ -1,4 +1,4 @@
-Template = Class{}
+Template = Class{__includes = BaseState}
 
 function Template:init(x, y, width, height)
     self.reset_x = x

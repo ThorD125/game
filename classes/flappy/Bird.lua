@@ -1,5 +1,4 @@
-Bird = Class{}
-
+Bird = Class{__includes = BaseState}
 
 function Bird:init(x, y, keyUp) --y is gap height location
     self.x = x

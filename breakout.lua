@@ -38,17 +38,22 @@ function love.load()
         vsync = true
     })
 
-    high_score = HighScoreState()
-
+    high_score_state = HighScoreState()
+    
+    pause_state = Menu("Breakout",{
+        {'START','play'},
+        {'HIGHSCORE','highscore'},
+    })
     state_machine = StateMachine {
         ['start'] = function() return StartState() end,
         -- ['enterhighscore'] = function() return EnterHighScoreState() end,
-        ['highscore'] = function() return high_score end,
+        ['highscore'] = function() return high_score_state end,
         -- ['gameover'] = function() return GameOverState() end,
         ['play'] = function() return PlayState() end,
-        -- ['paddleselect'] = function() return PaddleSelectState() end,
+           -- ['paddleselect'] = function() return PaddleSelectState() end,
         -- ['serve'] = function() return ServeState() end,
         -- ['victory'] = function() return VictoryState() end
+        
     }
     
     state_machine:change('start')

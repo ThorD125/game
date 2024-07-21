@@ -4,7 +4,7 @@ PlayState = Class{__includes = BaseState}
 function PlayState:init()
     self:reset()
 
-    score = 0
+    self.score = 0
 end
 
 DEBUG = true
@@ -36,7 +36,7 @@ function PlayState:update(dt)
     end
 
     if self.ball.y >= virtual_window_height then
-        if high_score:append(score) then
+        if high_score_state:append(self.score) then
             state_machine:change('highscore')
         else
             state_machine:change('gameover')
@@ -92,7 +92,7 @@ function PlayState:render()
 
     if self.paused then
     --    renderHugeText('Paused: '.. tostring(self.paused))
-       renderHugeText('Paused')
+       renderHugeText('Paused', size[4])
     end
 end
 

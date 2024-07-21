@@ -1,5 +1,4 @@
-Pipe = Class{}
-
+Pipe = Class{__includes = BaseState}
 
 function Pipe:init(x, y, gapHeight)
     self.x = x

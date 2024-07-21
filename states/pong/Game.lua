@@ -9,7 +9,6 @@ function GameState:init()
 end
 
 function GameState:update(dt)
-    
     self.player1:update(dt)
     self.player2:update(dt)
     self.ball:update(dt)

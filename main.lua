@@ -49,7 +49,7 @@ debug = DebugScreen()
 -- 01
 -- require 'flappy'
 -- 02
--- require 'breakout'
+require 'breakout'
 -- 03
 -- require 'match'
 -- 04
@@ -71,7 +71,7 @@ debug = DebugScreen()
 
 -- require 'rpg'
 -- require 'template'
-require 'utils.sprite_tester'
+-- require 'utils.sprite_tester'
 
 function love.resize(w, h)
     push:resize(w, h)

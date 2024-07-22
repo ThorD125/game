@@ -16,9 +16,10 @@ function Brick:init(x, y)
     self.inPlay = true
     
     -- self.psystem = love.graphics.newParticleSystem(img.particle, 64)
-    -- self.psystem:setParticleLifetime(0.5, 1)
-    -- self.psystem:setLinearAcceleration(-15, 0, 15, 80)
-    -- self.psystem:setEmissionArea('normal', 10, 10)
+    -- self.psystem:setParticleLifetime ( 10,10 )
+    -- self.psystem:setSizeVariation ( 1 )
+    -- self.psystem:setSpeed ( 20, 20 )
+    -- self.psystem:setColors ( 1, 1, 1, 1, 1, 1, 1, 0 )
 end
 
 function Brick:update(dt)
@@ -34,6 +35,9 @@ function Brick:render()
 end
 
 function Brick:hit()
+    -- self.psystem:setColors(255,0,255,255,100,0,100,0)
+    -- self.psystem:emit(64)
+
     score = score + 1
     if self.tier > 0 then
         self.tier = self.tier - 1

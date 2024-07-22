@@ -12,13 +12,6 @@ img = {
     ['ui'] = love.graphics.newImage('assets/images/breakout/ui.png'),
 }
 
--- img = {
---     ['background'] = love.graphics.newImage('graphics/background.png'),
---     ['main'] = love.graphics.newImage('graphics/breakout.png'),
---     ['arrows'] = love.graphics.newImage('graphics/arrows.png'),
---     ['hearts'] = love.graphics.newImage('graphics/hearts.png'),
---     ['particle'] = love.graphics.newImage('graphics/particle.png')
--- }
 frames = {
     ['arrows'] = GenerateQuads(img.arrows, 24, 24),
     ['paddles'] = GenerateQuadsPaddles(img.breakout),

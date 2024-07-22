@@ -4,7 +4,6 @@ require 'dependencies.template'
 require 'states.Menu'
 require 'states.Game'
 require 'states.Gameover'
-require 'classes.example_movement'
 require 'classes.example_cube'
 require 'utils.utils'
 

@@ -1,6 +1,6 @@
 ExampleCube = Class{__includes = BaseState}
 
-require 'classes.example_movement'
+require 'classes.Movement'
 
 function ExampleCube:init()
     self.moving = Movement()

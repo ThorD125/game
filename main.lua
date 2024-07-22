@@ -22,6 +22,22 @@ sound = {
     ['background']=love.audio.newSource('assets/sound/backgroound.mp3', 'stream'),
 }
 
+
+positions = {
+    ["up_right"] = 0,
+    ["down_right"] = 1,
+    ["right_left"] = 2,
+    ["left_right"] = 3,
+    ["up_left"] = 4,
+    ["down_left"] = 5,
+    ["right_right"] = 6,
+    ["left_left"] = 7,
+    ["up"] = 8,
+    ["down"] = 9,
+    ["right"] = 10,
+    ["left"] = 11,
+}
+
 debug = DebugScreen()
 
 -- sound.background:setLooping(true)
@@ -54,16 +70,9 @@ debug = DebugScreen()
 -- require 'valve'
 
 -- require 'rpg'
-require 'template'
+-- require 'template'
+require 'utils.sprite_tester'
 
 function love.resize(w, h)
     push:resize(w, h)
 end
-
--- function love.gamepadpressed(joystick, button)
---     text = button
--- end
-
--- function love.gamepadaxis(joystick, axis, value)
---     text = axis
--- end

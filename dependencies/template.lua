@@ -10,6 +10,7 @@ require 'classes.StateMachine'
 require 'classes.Scoreboard'
 require 'classes.HealthBar_Minecraft'
 require 'classes.Menu'
+require 'classes.Sprites'
 
 
 require 'states.Base'

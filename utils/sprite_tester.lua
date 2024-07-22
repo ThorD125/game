@@ -6,7 +6,8 @@ function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     math.randomseed(os.time())
     
-    test_img = love.graphics.newImage('assets/images/Drayden.png')
+    -- test_img = love.graphics.newImage('assets/images/Drayden.png')
+    test_img = love.graphics.newImage('assets/images/Cynthia.png')
     
     virtual_window_width = test_img:getWidth()
     virtual_window_height = test_img:getHeight()
@@ -56,17 +57,10 @@ function love.draw()
     
     
 
-    -- testSprite:render(positions.up_right)
     love.graphics.setColor(colors.green)
     love.graphics.print(tostring(#testSprite.quads), 0, 0)
     resetColor()
-    -- testSprite:render(1)
-    -- testSprite:render(positions.down_right)
     testSprite:render(positions.left_left)
-    -- testSprite:render(3)
-    -- testSprite:render(4)
-    -- testSprite:render(positions.down)
-    -- testSprite:render(positions.down)
 
     push:finish()
 end

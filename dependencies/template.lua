@@ -14,4 +14,5 @@ require 'classes.Menu'
 
 require 'states.Base'
 require 'states.Countdown'
+require 'states.DebugScreen'
 

@@ -43,10 +43,9 @@ end
 function love.draw()
     push:start()
     
-
-    backgroundRender(img.background)
+    backgroundRender(img_main.background)
     
     state_machine:render()
-    
+        
     push:finish()
 end

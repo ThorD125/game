@@ -8,16 +8,6 @@ function renderHugeText(text, size, x, y)
     resetColor()
 end
 
-function displayFPS()
-    love.graphics.setFont(font[size[1]])
-    love.graphics.setColor(0,255,0,255)
-    love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
-    love.graphics.print('State: ' .. state_machine:getCurrentState(), 10, 20)
-
-    state_machine:getCurrentState()
-    resetColor()
-end
-
 function love.keypressed(key)
     love.keyboard.keysPressed[key] = true
 end

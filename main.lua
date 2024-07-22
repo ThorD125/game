@@ -22,6 +22,8 @@ sound = {
     ['background']=love.audio.newSource('assets/sound/backgroound.mp3', 'stream'),
 }
 
+debug = DebugScreen()
+
 -- sound.background:setLooping(true)
 -- sound.background:play()
 -- sound.background:setVolume(0.2)
@@ -31,7 +33,7 @@ sound = {
 -- 01
 -- require 'flappy'
 -- 02
-require 'breakout'
+-- require 'breakout'
 -- 03
 -- require 'match'
 -- 04
@@ -52,7 +54,7 @@ require 'breakout'
 -- require 'valve'
 
 -- require 'rpg'
--- require 'template'
+require 'template'
 
 function love.resize(w, h)
     push:resize(w, h)

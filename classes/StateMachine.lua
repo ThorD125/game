@@ -23,13 +23,15 @@ end
 function StateMachine:update(dt)
 	self.current:update(dt)
 
+	debug:update()
+
     love.keyboard.keysPressed = {}
 end
 
 function StateMachine:render()
 	self.current:render()
     
-	displayFPS()
+    debug:render()
 end
 
 function StateMachine:getCurrentState()

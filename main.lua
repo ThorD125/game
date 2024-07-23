@@ -22,7 +22,6 @@ sound = {
     ['background']=love.audio.newSource('assets/sound/backgroound.mp3', 'stream'),
 }
 
-
 positions = {
     ["up_right"] = 0,
     ["down_right"] = 1,
@@ -49,9 +48,9 @@ debug = DebugScreen()
 -- 01
 -- require 'flappy'
 -- 02
-require 'breakout'
+-- require 'breakout'
 -- 03
--- require 'match'
+require 'match'
 -- 04
 -- require 'mario'
 -- 05

@@ -1,6 +1,3 @@
-require 'dependencies.template'
-
-
 function love.load()
     love.window.setTitle('Sprite Drayden')
     love.graphics.setDefaultFilter('nearest', 'nearest')

@@ -31,6 +31,7 @@ function love.load()
         vsync = true
     })
 
+    background = Background(img.background)
     high_score_state = HighScoreState()
     
     pause_state = Menu("Breakout",{
@@ -59,7 +60,7 @@ end
 function love.draw()
     push:start()
 
-    backgroundRender(img.background)
+    background:render()
 
     state_machine:render()
     

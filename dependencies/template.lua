@@ -6,14 +6,13 @@ require 'constants.template'
 require 'utils.utils'
 require 'utils.colors'
 
+require 'states.Base'
+require 'states.Countdown'
+require 'states.DebugScreen'
+
 require 'classes.StateMachine'
 require 'classes.Scoreboard'
 require 'classes.HealthBar_Minecraft'
 require 'classes.Menu'
 require 'classes.Sprites'
-
-
-require 'states.Base'
-require 'states.Countdown'
-require 'states.DebugScreen'
-
+require 'classes.Background'

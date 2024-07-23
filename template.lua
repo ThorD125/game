@@ -1,6 +1,3 @@
-
-require 'dependencies.template'
-
 require 'states.Menu'
 require 'states.Game'
 require 'states.Gameover'
@@ -18,7 +15,7 @@ function love.load()
         resizable = true,
         vsync = true
     })
-
+    background = Background(img_main.background)
     game = GameState()
 
     state_machine = StateMachine {
@@ -42,7 +39,7 @@ end
 function love.draw()
     push:start()
     
-    backgroundRender(img_main.background)
+    background:render()
     
     state_machine:render()
         

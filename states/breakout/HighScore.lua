@@ -11,11 +11,6 @@ function HighScoreState:update(dt)
 end
 
 
-high_score_table = {}
-high_score_amount = 5
-
-score = 0
-
 
 function HighScoreState:render()
     love.graphics.setColor(255, 0, 0, 255)
@@ -25,7 +20,7 @@ function HighScoreState:render()
     local offset = 100
 
     local not_found_current_score = true
-    for i, score in ipairs(high_score_table) do
+    for i, score in ipairs(self.high_score_table) do
         if score == self.last_score_added and not_found_current_score then 
             renderHugeText("**" .. tostring(i) .. ": " ..tostring(score) .. "**", size[1], 0, offset + y*height)
             not_found_current_score = false
@@ -39,20 +34,42 @@ function HighScoreState:render()
 end
 
 
+score = 0
 function HighScoreState:reset()
     self.last_score_added = 0
+    
+    love.filesystem.setIdentity("breakout")
+    if not love.filesystem.getInfo("breakout" .. '.lst') then
+        local scores = ''
+        local high_score_amount = 5
+        for i=0, high_score_amount, 1 do
+            scores = scores .. "0" .. '\n'
+        end
 
-    for i = 1, high_score_amount do
-        high_score_table[i] = 0
+        love.filesystem.write("breakout.lst", scores)
+    end
+        
+        
+    self.high_score_table = {}
+    count = 1
+    for line in love.filesystem.lines("breakout.lst") do
+        self.high_score_table[count]=tonumber(line)
+        count = count + 1
     end
 end
 
 function HighScoreState:append(new_score)
-    if score > high_score_table[#high_score_table] then
+    if score > self.high_score_table[#self.high_score_table] then
 
-        table.insert(high_score_table, #high_score_table, new_score)
-        table.sort(high_score_table, function(a, b) return a > b end)
-        table.slice(high_score_table, 1, #high_score_table -1)
+        table.insert(self.high_score_table, #self.high_score_table, new_score)
+        table.sort(self.high_score_table, function(a, b) return a > b end)
+        table.slice(self.high_score_table, 1, #self.high_score_table -1)
+
+        local scores = ""
+        for i=1, #self.high_score_table do
+            scores = scores .. self.high_score_table[i] .. '\n'
+        end
+        love.filesystem.write("breakout.lst", scores)
 
         self.last_score_added = new_score
 

@@ -2,6 +2,7 @@ require 'dependencies.match'
 
 img = {
     ['background'] = love.graphics.newImage('assets/images/match/background.png'),
+    ['flappy'] = love.graphics.newImage('assets/images/match/flappy.png'),
 }
 
 function love.load()
@@ -15,15 +16,13 @@ function love.load()
         vsync = true
     })
     
-    menu = Menu("match",{
-        {'START','countdown'},
-        {'HIGHSCORE','highscore'},
-    })
 
     background = Background(img.background, 0, background_scroll_speed)
+    
 
     state_machine = StateMachine {
-        ['menu'] = function() return menu end,
+        ['menu'] = function() return MatchMenu() end,
+        ['start'] = function() return StartState() end,
         ['countdown'] = function () return CountdownState() end,
         ['play'] = function () return PlayState() end,
             
@@ -37,8 +36,10 @@ function love.load()
         
     }
     
-    -- state_machine:change('menu')
-    state_machine:change('play')
+    -- state_machine:change('start')
+    state_machine:change('menu')
+    -- state_machine:change('play')
+    -- state_machine:change('countdown')
 end
 
 function love.update(dt)

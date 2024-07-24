@@ -4,3 +4,6 @@
 [submodule "libs/push"]
 	path = libs/push
 	url = https://github.com/Ulydev/push
+[submodule "libs/knife"]
+	path = libs/knife
+	url = https://github.com/airstruck/knife

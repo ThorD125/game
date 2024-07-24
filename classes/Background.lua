@@ -16,11 +16,12 @@ end
 function Background:render()
     love.graphics.draw(self.img, self.x, self.y, 0, self.x_scale, self.y_scale)
     love.graphics.draw(self.img, self.x + (self.image_width*self.x_scale), self.y, 0, self.x_scale, self.y_scale)
+    love.graphics.draw(self.img, self.x + (self.image_width*self.x_scale*2), self.y, 0, self.x_scale, self.y_scale)
 end
 
 function Background:update(dt)
     self.x = self.x - self.x_speed * dt
-    if (self.x + (self.image_width*self.x_scale)) < virtual_window_width - self.x_speed then
+    if (self.x < 0 - self.image_width) then
         self.x = 0
     end
 

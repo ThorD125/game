@@ -16,7 +16,7 @@ function love.load()
     })
     
     menu = Menu("match",{
-        {'START','play'},
+        {'START','countdown'},
         {'HIGHSCORE','highscore'},
     })
 
@@ -24,6 +24,9 @@ function love.load()
 
     state_machine = StateMachine {
         ['menu'] = function() return menu end,
+        ['countdown'] = function () return CountdownState() end,
+        ['play'] = function () return PlayState() end,
+            
         -- ['enterhighscore'] = function() return EnterHighScoreState() end,
         -- ['highscore'] = function() return high_score_state end,
         -- ['gameover'] = function() return GameOverState() end,
@@ -34,7 +37,8 @@ function love.load()
         
     }
     
-    state_machine:change('menu')
+    -- state_machine:change('menu')
+    state_machine:change('play')
 end
 
 function love.update(dt)

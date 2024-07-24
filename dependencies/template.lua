@@ -1,5 +1,6 @@
 push = require 'libs.push.push'
 Class = require 'libs.hump.class'
+Timer = require 'libs.knife.knife.timer'
 
 require 'constants.template'
 

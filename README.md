@@ -17,3 +17,6 @@ https://www.youtube.com/watch?v=64TbMmCgRv0&list=PLWKjhJtqVAbluXJKKbCIb4xd7fcRkp
 git submodule update --init --remote --recursive
 
 www.spriters-resource.com
+
+
+checkk rules in for loop doen

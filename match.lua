@@ -3,6 +3,7 @@ require 'dependencies.match'
 img = {
     ['background'] = love.graphics.newImage('assets/images/match/background.png'),
     ['flappy'] = love.graphics.newImage('assets/images/match/flappy.png'),
+    ['tiles'] = love.graphics.newImage('assets/images/match/tiles.png'),
 }
 
 function love.load()
@@ -36,9 +37,8 @@ function love.load()
         
     }
     
-    -- state_machine:change('start')
-    state_machine:change('menu')
-    -- state_machine:change('play')
+    -- state_machine:change('menu')
+    state_machine:change('play')
     -- state_machine:change('countdown')
 end
 

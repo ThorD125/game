@@ -21,7 +21,7 @@ function PlayState:update(dt)
         return
     end
 
-    Timer.update(dt)
+    -- Timer.update(dt)
     
     -- if timer < duration then
     --     timer = timer + dt
@@ -34,13 +34,11 @@ function PlayState:update(dt)
     --         bird.x = math.min(flappy_max, flappy_max * (timer / bird.rate))
     --     end
     -- end
+
+    board:update(dt)
 end
 
 function PlayState:render()
-    if self.paused then
-    --    renderHugeText('Paused: '.. tostring(self.paused))
-       renderHugeText('Paused', size[4])
-    end
 
     -- for x=1, #self.counters do
     --     renderHugeText(self.counters[x], size[2], 100, 10*x)
@@ -49,6 +47,14 @@ function PlayState:render()
     --     love.graphics.draw(flappy, bird.x, bird.y)
     -- end
     -- renderHugeText(tostring(timer), size[3], 0, 50)
+
+    -- love.graphics.draw(flappy.img, flappy.x, flappy.y)
+    
+    board:render()
+    if self.paused then
+    --    renderHugeText('Paused: '.. tostring(self.paused))
+       renderHugeText('Paused', size[4])
+    end
 end
 
 
@@ -82,5 +88,30 @@ function PlayState:reset()
     --     })
     -- end
 
+    -- duration = 2
+    -- x_end = virtual_window_width - img.flappy:getWidth()
+    -- y_end = virtual_window_height - img.flappy:getHeight()
+    -- flappy = {
+    --     img = img.flappy,
+    --     x = 0,
+    --     y = 0,
+    --     rate = math.random() + math.random(duration - 1)
+    -- }
+    -- Timer.tween(flappy.rate, {
+    --     [flappy] = { x = x_end, y = 0 }
+    -- }):finish(function()
+    --     Timer.tween(flappy.rate, {
+    --         [flappy] = { y = y_end, x = x_end }
+    --     }):finish(function()
+    --         Timer.tween(flappy.rate, {
+    --             [flappy] = { y = y_end, x = 0 }
+    --         }):finish(function()
+    --             Timer.tween(flappy.rate, {
+    --                 [flappy] = { y = 0, x = 0 }
+    --             })
+    --         end)
+    --     end)
+    -- end)
 
+    board = Board(8,8)
 end

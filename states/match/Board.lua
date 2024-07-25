@@ -30,13 +30,13 @@ function Board:checkKeyStuf(dt)
         end
     else
         if love.keyboard.wasPressed("up") then
-            self.current_tile_position_y = self.current_tile_position_y-1
+            self.current_tile_position_y = self:ClampY(self.current_tile_position_y-1)
         elseif love.keyboard.wasPressed("down") then
-            self.current_tile_position_y = self.current_tile_position_y+1
+            self.current_tile_position_y = self:ClampY(self.current_tile_position_y+1)
         elseif love.keyboard.wasPressed("left") then
-            self.current_tile_position_x = self.current_tile_position_x-1
+            self.current_tile_position_x = self:ClampX(self.current_tile_position_x-1)
         elseif love.keyboard.wasPressed("right") then
-            self.current_tile_position_x = self.current_tile_position_x+1
+            self.current_tile_position_x = self:ClampX(self.current_tile_position_x+1)
         end
     end
 end
@@ -70,36 +70,82 @@ function Board:swap(x, y)
         direction = "up"
     end
 
-    if self:CheckAll(new_x, new_y, current_tile.sprite, direction) then
-        current_tile.sprite, change_tile.sprite = change_tile.sprite, current_tile.sprite
+    coords = self:CheckAll(new_x, new_y, current_tile.sprite, direction)
+    if coords then
+        current_tile.sprite, change_tile.sprite = change_tile.sprite, nil
+
+        for i, coord in ipairs(coords) do
+            x = coord[1]
+            x = self:ClampX(x)
+            y = coord[2]
+            y = self:ClampY(y)
+            self.tiles[y][x].sprite = nil
+        end
     end
     self.selected = false
 end
 
+function Board:ClampX(x)
+    if x < 1 then
+        x = 1
+    end
+    if self.width < x then
+        x = self.width
+    end
+    return x
+end
+
+function Board:ClampY(y)
+    if y < 1 then
+        y = 1
+    end
+    if self.height < y then
+        y = self.height
+    end
+    return y
+end
+
+function Board:Clamping(x, y)
+    x = self:ClampX(x)
+    y = self:ClampY(y)
+    return x, y
+end
+
 function Board:CheckAll(new_x, new_y, new_color, direction)
-    return ((self:CheckIndividual(new_color,new_x, new_y, 1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 2, 0) and not(direction == "left"))
-    or ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 1, 0) and not(direction == "right"))
-    or ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, -2, 0) and not(direction == "left" or direction == "right"))
-    or ((self:CheckIndividual(new_color,new_x, new_y, 0, 1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 2) and not(direction == "up"))
-    or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, -2) and not(direction == "down" ))
-    or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 1) and not(direction == "up" or direction == "down"))
+    -- return ((self:CheckIndividual(new_color,new_x, new_y, 1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 2, 0) and not(direction == "left"))
+    -- or ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 1, 0) and not(direction == "right"))
+    -- or ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, -2, 0) and not(direction == "left" or direction == "right"))
+    -- or ((self:CheckIndividual(new_color,new_x, new_y, 0, 1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 2) and not(direction == "up"))
+    -- or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, -2) and not(direction == "down" ))
+    -- or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 1) and not(direction == "up" or direction == "down"))
+
+    if ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 1, 0) and not(direction == "left" or direction == "right")) then
+        return {{new_x - 1, new_y + 0}, {new_x + 1, new_y + 0}}
+    end
+    if ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 1) and not(direction == "up" or direction == "down")) then
+        return {{new_x + 0, new_y - 1}, {new_x + 0, new_y + 1}}
+    end
+
+    if ((self:CheckIndividual(new_color,new_x, new_y, 1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 2, 0) and not(direction == "left")) then
+        return {{new_x + 1, new_y + 0}, {new_x + 2, new_y + 0}}
+    end
+    if ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, -2, 0) and not(direction == "right")) then
+        return {{new_x - 1, new_y + 0}, {new_x - 2, new_y + 0}}
+    end
+    if ((self:CheckIndividual(new_color,new_x, new_y, 0, 1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 2) and not(direction == "up")) then
+        return {{new_x + 0, new_y + 1}, {new_x + 0, new_y + 2}}
+    end
+    if ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, -2) and not(direction == "down" )) then
+        return {{new_x + 0, new_y - 1}, {new_x + 0, new_y - 2}}
+    end
 end
 
 function Board:CheckIndividual(new_color, new_x, new_y, x, y)
     local change_x = new_x+x
-    if change_x < 1 then
-        change_x = 1
-    end
-    if self.width-1 < change_x then
-        change_x = self.width-1
-    end
+    change_x = self:ClampX(change_x)
     local change_y = new_y+y
-    if change_y < 1 then
-        change_y = 1
-    end
-    if self.height-1 < change_y then
-        change_y = self.height-1
-    end
+    change_y = self:ClampY(change_y)
+
     -- return true
     return self:tileColor(change_x, change_y) == new_color
     -- return self.tiles[change_y][change_x].sprite == new_color
@@ -114,7 +160,9 @@ function Board:render()
     for y=1, self.height do
         for x=1, self.width do
             local tile = self.tiles[y][x]
-            self.tile_sprites:render(tile.sprite, tile.x, tile.y)
+            if tile.sprite then
+                self.tile_sprites:render(tile.sprite, tile.x, tile.y)
+            end
             if self.current_tile_position_x == tile.x_grid and self.current_tile_position_y == tile.y_grid then
                 if self.selected then
                      love.graphics.setColor(colors.selector_selected)

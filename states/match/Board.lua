@@ -58,22 +58,34 @@ function Board:swap(x, y)
         new_x = self.width-1
     end
     local change_tile = self.tiles[new_y][new_x]
-    if self:CheckSwap(new_x, new_y, current_tile.sprite) then
+
+    local direction = ""
+    if x == 1 then
+        direction = "right"
+    elseif x == -1 then
+        direction = "left"
+    elseif y == 1 then
+        direction = "down"
+    elseif y == -1 then
+        direction = "up"
+    end
+
+    if self:CheckAll(new_x, new_y, current_tile.sprite, direction) then
         current_tile.sprite, change_tile.sprite = change_tile.sprite, current_tile.sprite
     end
     self.selected = false
 end
 
-function Board:CheckSwap(new_x, new_y, new_color)
-    return (((self:check(new_color,new_x, new_y, 1, 0)) and self:check(new_color,new_x, new_y, 2, 0))
-    or ((self:check(new_color,new_x, new_y, -1, 0)) and self:check(new_color,new_x, new_y, 1, 0))
-    or ((self:check(new_color,new_x, new_y, 0, -1)) and self:check(new_color,new_x, new_y, 0, 1))
-    or ((self:check(new_color,new_x, new_y, -1, 0)) and self:check(new_color,new_x, new_y, -2, 0))
-    or ((self:check(new_color,new_x, new_y, 0, 1)) and self:check(new_color,new_x, new_y, 0, 2))
-    or ((self:check(new_color,new_x, new_y, 0, -1)) and self:check(new_color,new_x, new_y, 0, -2)))
+function Board:CheckAll(new_x, new_y, new_color, direction)
+    return (((self:CheckIndividual(new_color,new_x, new_y, 1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 2, 0) and not(direction == "left"))
+    or ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 1, 0) and not(direction == "right"))
+    or ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, -2, 0) and not(direction == "left" or direction == "right"))
+    or ((self:CheckIndividual(new_color,new_x, new_y, 0, 1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 2) and not(direction == "up"))
+    or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, -2) and not(direction == "down" )))
+    or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 1) and not(direction == "up" or direction == "down"))
 end
 
-function Board:check(new_color, new_x, new_y, x, y)
+function Board:CheckIndividual(new_color, new_x, new_y, x, y)
     local change_x = new_x+x
     if change_x < 1 then
         change_x = 1

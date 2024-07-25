@@ -43,20 +43,12 @@ end
 
 function Board:swap(x, y)
     local current_tile = self.tiles[self.current_tile_position_y][self.current_tile_position_x]
+    
     local new_y = self.current_tile_position_y+y
-    if new_y < 1 then
-        new_y = 1
-    end
-    if self.height-1 < new_y then
-        new_y = self.height-1
-    end
+    new_y = self:ClampY(new_y)
     local new_x = self.current_tile_position_x+x
-    if new_x < 1 then
-        new_x = 1
-    end
-    if self.width-1 < new_x then
-        new_x = self.width-1
-    end
+    new_x = self:ClampX(new_x)
+
     local change_tile = self.tiles[new_y][new_x]
 
     local direction = ""
@@ -75,10 +67,20 @@ function Board:swap(x, y)
         current_tile.sprite, change_tile.sprite = change_tile.sprite, nil
 
         for i, coord in ipairs(coords) do
-            x = coord[1]
-            x = self:ClampX(x)
-            y = coord[2]
-            y = self:ClampY(y)
+            local x = coord[1]
+            if x < 1 then
+                return 
+            end
+            if self.width < x then
+                return 
+            end
+            local y = coord[2]
+            if y < 1 then
+                return 
+            end
+            if self.height < y then
+                return 
+            end
             self.tiles[y][x].sprite = nil
         end
     end
@@ -141,13 +143,22 @@ function Board:CheckAll(new_x, new_y, new_color, direction)
 end
 
 function Board:CheckIndividual(new_color, new_x, new_y, x, y)
-    local change_x = new_x+x
-    change_x = self:ClampX(change_x)
-    local change_y = new_y+y
-    change_y = self:ClampY(change_y)
-
+    local x = new_x+x
+    if x < 1 then
+        return false
+    end
+    if self.width < x then
+        return false
+    end
+    local y = new_y+y
+    if y < 1 then
+        return false
+    end
+    if self.height < y then
+        return false
+    end
+    return self:tileColor(x, y) == new_color
     -- return true
-    return self:tileColor(change_x, change_y) == new_color
     -- return self.tiles[change_y][change_x].sprite == new_color
 
 end
@@ -203,7 +214,7 @@ function Board:generate_tiles()
                 y_grid = y,
                 
                 -- sprite = math.random(self.tile_sprites.quad_count)
-                sprite = math.random(5)
+                sprite = math.random(2)
             })
         end
     end

@@ -77,11 +77,11 @@ function Board:swap(x, y)
 end
 
 function Board:CheckAll(new_x, new_y, new_color, direction)
-    return (((self:CheckIndividual(new_color,new_x, new_y, 1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 2, 0) and not(direction == "left"))
+    return ((self:CheckIndividual(new_color,new_x, new_y, 1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 2, 0) and not(direction == "left"))
     or ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, 1, 0) and not(direction == "right"))
     or ((self:CheckIndividual(new_color,new_x, new_y, -1, 0)) and self:CheckIndividual(new_color,new_x, new_y, -2, 0) and not(direction == "left" or direction == "right"))
     or ((self:CheckIndividual(new_color,new_x, new_y, 0, 1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 2) and not(direction == "up"))
-    or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, -2) and not(direction == "down" )))
+    or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, -2) and not(direction == "down" ))
     or ((self:CheckIndividual(new_color,new_x, new_y, 0, -1)) and self:CheckIndividual(new_color,new_x, new_y, 0, 1) and not(direction == "up" or direction == "down"))
 end
 

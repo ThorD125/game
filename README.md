@@ -20,3 +20,5 @@ www.spriters-resource.com
 
 als eigen sprites maken
 16 of 32 kleuren kiezen 
+
+checkk rules in for loop doen

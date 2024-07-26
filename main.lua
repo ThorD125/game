@@ -50,9 +50,9 @@ debug = DebugScreen()
 -- 02
 -- require 'breakout'
 -- 03
-require 'match'
+-- require 'match'
 -- 04
--- require 'mario'
+require 'mario'
 -- 05
 -- require 'zelda'
 -- 06

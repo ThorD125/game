@@ -17,3 +17,6 @@ https://www.youtube.com/watch?v=64TbMmCgRv0&list=PLWKjhJtqVAbluXJKKbCIb4xd7fcRkp
 git submodule update --init --remote --recursive
 
 www.spriters-resource.com
+
+als eigen sprites maken
+16 of 32 kleuren kiezen 

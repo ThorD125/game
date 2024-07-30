@@ -1,6 +1,6 @@
-require 'constants.match'
+require 'constants.mario'
 
-require 'utils.match'
+require 'utils.mario'
 
 -- require 'states.match.MatchMenu'
 -- require 'states.match.Start'

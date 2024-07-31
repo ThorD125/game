@@ -62,8 +62,8 @@ function love.load()
         
     }
     
-    state_machine:change('menu')
-    -- state_machine:change('play')
+    -- state_machine:change('menu')
+    state_machine:change('play')
     -- state_machine:change('countdown')
 end
 

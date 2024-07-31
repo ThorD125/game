@@ -40,4 +40,9 @@ end
 function Sprites:render(quad_count_position, x, y)
     resetColor()
     love.graphics.draw(self.img, self.quads[quad_count_position] or self.quads[1], x or self.x, y or self.y)
+    if virtual_window_width - self:getWidth() < self.x then
+        love.graphics.draw(self.img, self.quads[quad_count_position] or self.quads[1], (x or self.x) - virtual_window_width, y or self.y)
+    elseif virtual_window_height - self:getHeight() < self.y then
+        love.graphics.draw(self.img, self.quads[quad_count_position] or self.quads[1], x or self.x, (y or self.y) - virtual_window_height)
+    end
 end

@@ -21,6 +21,8 @@ function PlayState:update(dt)
         return
     end
 
+    mario:update(dt)
+
     -- Timer.update(dt)
     
     -- if timer < duration then
@@ -48,6 +50,8 @@ function PlayState:render()
 
     -- -- love.graphics.draw(flappy.img, flappy.x, flappy.y)
     
+    mario:render()
+
     -- board:render()
     if self.paused then
     --    renderHugeText('Paused: '.. tostring(self.paused))
@@ -58,5 +62,9 @@ end
 
 function PlayState:reset()
     self.paused = false
+    
+    -- mario = Character('assets/images/Drayden.png',3, 4, nil, nil, "l", "m", 100)
+    mario = Character('assets/images/Drayden.png',3, 4, "j", "k", "l", "m", 100)
+    -- mario = Character('assets/images/Drayden.png',3, 4, nil, nil, "left", "right", 100)
     
 end

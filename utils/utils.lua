@@ -15,6 +15,9 @@ end
 love.keyboard.keysPressed = {}
 
 function love.keyboard.wasPressed(key)
+    if key == nil then
+        return false
+    end
     if love.keyboard.keysPressed[key] then
         return true
     else

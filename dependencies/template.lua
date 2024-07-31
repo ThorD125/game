@@ -13,7 +13,11 @@ require 'states.DebugScreen'
 
 require 'classes.StateMachine'
 require 'classes.Scoreboard'
-require 'classes.HealthBar_Minecraft'
 require 'classes.Menu'
-require 'classes.Sprites'
 require 'classes.Background'
+
+require 'classes.Character'
+require 'classes.Movement'
+require 'classes.HealthBar_Minecraft'
+require 'classes.Sprites'
+

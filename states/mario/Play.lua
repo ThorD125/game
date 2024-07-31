@@ -19,52 +19,54 @@ function PlayState:update(dt)
     elseif love.keyboard.wasPressed('space') then
         self.paused = true
         return
-    end
+    end 
 
-    mario:update(dt)
+    map:update(dt)
 
-    -- Timer.update(dt)
-    
-    -- if timer < duration then
-    --     timer = timer + dt
-    --     flappyX = math.min(flappy_max, flappy_max * (timer / duration))
-    --     for k, bird in pairs(birds) do
-            
-    --         -- math.min ensures we don't go past the end
-    --         -- timer / MOVE_DURATION is a ratio that we effectively just multiply our
-    --         -- X by each turn to make it seem as if we're moving right
-    --         bird.x = math.min(flappy_max, flappy_max * (timer / bird.rate))
-    --     end
-    -- end
+    -- mario:update(dt)
+
 end
 
 function PlayState:render()
 
-    -- -- for x=1, #self.counters do
-    -- --     renderHugeText(self.counters[x], size[2], 100, 10*x)
-    -- -- end
-    -- -- for k, bird in pairs(birds) do
-    -- --     love.graphics.draw(flappy, bird.x, bird.y)
-    -- -- end
-    -- -- renderHugeText(tostring(timer), size[3], 0, 50)
+    map:render()
 
-    -- -- love.graphics.draw(flappy.img, flappy.x, flappy.y)
-    
-    mario:render()
-
-    -- board:render()
     if self.paused then
     --    renderHugeText('Paused: '.. tostring(self.paused))
        renderHugeText('Paused', size[4])
     end
 end
 
-
 function PlayState:reset()
     self.paused = false
     
-    -- mario = Character('assets/images/Drayden.png',3, 4, nil, nil, "l", "m", 100)
-    mario = Character('assets/images/Drayden.png',3, 4, "j", "k", "l", "m", 100)
+    local positions = {
+        ["up"] = { 
+            ["still"] = 9,
+            ["left"] = 5,
+            ["right"] = 1,
+        },
+        ["down"] = {
+            ["still"] = 10,
+            ["left"] = 6,
+            ["right"] = 2,
+        },
+        ["left"] = {
+            ["still"] = 12,
+            ["right"] = 8,
+            ["left"] = 4,
+        },
+        ["right"] = {
+            ["still"] = 11,
+            ["left"] = 7,
+            ["right"] = 3,
+        }
+    }
+
+    map = Board(100, 15)
+
+    -- mario = Character('assets/images/Drayden.png', 3, 4, nil, nil, "l", "m", 100, positions)
+    -- mario = Character('assets/images/Drayden.png',3, 4, "j", "k", "l", "m", 100, positions)
     -- mario = Character('assets/images/Drayden.png',3, 4, nil, nil, "left", "right", 100)
     
 end

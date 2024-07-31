@@ -15,6 +15,8 @@ function Movement:init(x, y, width, height, up, down, left, right, speed, diagon
 
     self.reset_diagonal_allowed = diagonal_allowed or false
 
+    self.facing = "down"
+
     self:reset()
 
     joystick_left = love.joystick.getJoysticks()[1]
@@ -29,23 +31,31 @@ function Movement:update(dt)
     else
         if self.diagonal_allowed then
             if self.key.up and love.keyboard.isDown(self.key.up) and not love.keyboard.isDown(self.key.down) then
+                self.facing = "up"
                 self.y = self.y - self.speed * dt
             elseif self.key.down and love.keyboard.isDown(self.key.down) and not love.keyboard.isDown(self.key.up) then
+                self.facing = "down"
                 self.y = self.y + self.speed * dt
             end
             if self.key.left and love.keyboard.isDown(self.key.left) and not love.keyboard.isDown(self.key.right) then
+                self.facing = "left"
                 self.x = self.x - self.speed * dt
             elseif self.key.right and love.keyboard.isDown(self.key.right) and not love.keyboard.isDown(self.key.left) then
+                self.facing = "right"
                 self.x = self.x + self.speed * dt
             end
         else 
             if self.key.up and love.keyboard.isDown(self.key.up) and not love.keyboard.isDown(self.key.down) then
+                self.facing = "up"
                 self.y = self.y - self.speed * dt
             elseif self.key.down and love.keyboard.isDown(self.key.down) and not love.keyboard.isDown(self.key.up) then
+                self.facing = "down"
                 self.y = self.y + self.speed * dt
             elseif self.key.left and love.keyboard.isDown(self.key.left) and not love.keyboard.isDown(self.key.right) then
+                self.facing = "left"
                 self.x = self.x - self.speed * dt
             elseif self.key.right and love.keyboard.isDown(self.key.right) and not love.keyboard.isDown(self.key.left) then
+                self.facing = "right"
                 self.x = self.x + self.speed * dt
             end
         end

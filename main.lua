@@ -14,27 +14,13 @@ font = {
 img_main = {
     ['background'] = love.graphics.newImage('assets/images/background.png'),
     ['hearts'] = love.graphics.newImage('assets/images/hearts.png'),
+    ['blocks'] = love.graphics.newImage('assets/images/blocks.png'),
 }
 
 sound = {
     ['collision']=love.audio.newSource('assets/sound/collision.wav', 'stream'),
     ['laser']=love.audio.newSource('assets/sound/laser.wav', 'stream'),
     ['background']=love.audio.newSource('assets/sound/backgroound.mp3', 'stream'),
-}
-
-positions = {
-    ["up_right"] = 0,
-    ["down_right"] = 1,
-    ["right_left"] = 2,
-    ["left_right"] = 3,
-    ["up_left"] = 4,
-    ["down_left"] = 5,
-    ["right_right"] = 6,
-    ["left_left"] = 7,
-    ["up"] = 8,
-    ["down"] = 9,
-    ["right"] = 10,
-    ["left"] = 11,
 }
 
 debug = DebugScreen()

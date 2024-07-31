@@ -3,12 +3,13 @@ HealthBar_Minecraft = Class{__includes = BaseState}
 function HealthBar_Minecraft:init(current_hearts, hearts_max, x, y)
     self.reset_current_hearts = current_hearts*2
     self.reset_hearts_max = hearts_max*2
-    self.reset_x = x
+    
+    self.width = ((img_main.hearts:getWidth()/4) * (self.reset_current_hearts/2)) + 10 
+    self.height = img_main.hearts:getHeight()/1
+    
+    self.reset_x = x - (self.width/2)
     self.reset_y = y
-    
-    self.width = img_main.hearts:getWidth()
-    self.height = img_main.hearts:getHeight()
-    
+
     self:reset()
 end
 
@@ -29,12 +30,15 @@ function HealthBar_Minecraft:healHeart()
 end
 
 function HealthBar_Minecraft:render(dt)
+    -- love.graphics.setColor(colors.pink)
+    -- love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+    -- resetColor()
     for i = 1, self.hearts_max do
         if i <= self.current_hearts then
             if i % 2 == 0 then
-                love.graphics.draw(img_main.hearts, self.quads[2], self.x + (i * 5), self.y)
+                love.graphics.draw(img_main.hearts, self.quads[2], self.x + (i * 5) - 5, self.y)
             else
-                love.graphics.draw(img_main.hearts, self.quads[1], self.x + (i * 5), self.y)
+                love.graphics.draw(img_main.hearts, self.quads[1], self.x + (i * 5) - 5, self.y)
             end
         else
             if i % 2 == 0 then
@@ -58,7 +62,7 @@ function HealthBar_Minecraft:reset()
     if (self.reset_y < virtual_window_height) then
         self.y = self.reset_y
     else
-        self.y = virtual_window_height - self.height
+        self.y = virtual_window_height - (self.height*2)
     end
 
     self.quads = self.GenerateHalfHearthQuads(img_main.hearts)
@@ -68,10 +72,10 @@ function HealthBar_Minecraft:GenerateHalfHearthQuads(atlas)
     local counter = 1
     local quads = {}
 
-    for i = 0, 3 do
+    for i = 0, 4 do
         quads[counter] = love.graphics.newQuad(i*9, 0, 5, 9, img_main.hearts)
         counter = counter + 1
-        quads[counter] = love.graphics.newQuad((i*9)+5, 0, 5, 9, img_main.hearts)
+        quads[counter] = love.graphics.newQuad((i*9)+4, 0, 5, 9, img_main.hearts)
         counter = counter + 1
     end
 

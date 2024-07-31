@@ -26,7 +26,8 @@ tile_sets = tile_set_width * tile_set_height
 jump_boost = -150
 
 -- snail movement speed
-sneak_speed = 10
+move_speed = 60
+neak_speed = 10
 
 --
 -- tile IDs

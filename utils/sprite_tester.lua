@@ -3,12 +3,12 @@ function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     math.randomseed(os.time())
     
-    -- test_img = love.graphics.newImage('assets/images/Drayden.png')
+    test_img = love.graphics.newImage('assets/images/Drayden.png')
     -- test_img = love.graphics.newImage('assets/images/Cynthia.png')
-    test_img = love.graphics.newImage('assets/images/match/tiles.png')
+    testSprite = Sprites(test_img, 0, 0, 3, 4)
     
-    virtual_window_width = test_img:getWidth()
-    virtual_window_height = test_img:getHeight()
+    virtual_window_width = testSprite.img:getWidth()
+    virtual_window_height = testSprite.img:getHeight()
 
     pixels_square = 700
 
@@ -20,6 +20,11 @@ function love.load()
         scaler = scale_y
     end
 
+
+    -- if scaler < 1 then
+    --     scaler = virtual_window_width / pixels_square
+    -- end
+
     window_width = virtual_window_width * scaler
     window_height = virtual_window_height * scaler
     push:setupScreen(virtual_window_width, virtual_window_height, window_width, window_height, {
@@ -27,9 +32,7 @@ function love.load()
         resizable = true,
         vsync = true
     })
-    
-    testSprite = Sprites(test_img, 0, 0, 12, 9)
-    debug = false
+    debug = true
 end
 
 function love.update(dt)
@@ -54,17 +57,13 @@ function love.draw()
         end
         resetColor()
         love.graphics.setColor(255,255,255, 0.8)
-        love.graphics.draw(test_img, 0, 0)
+        love.graphics.draw(testSprite.img, 0, 0)
     end
     resetColor()
     
-    
-
-    love.graphics.setColor(colors.green)
-    love.graphics.print(tostring(#testSprite.quads), 0, 0)
     resetColor()
-    -- testSprite:render(1)
-    testSprite:render(2)
+    testSprite:render(0)
+    -- testSprite:render(2)
 
     push:finish()
 end

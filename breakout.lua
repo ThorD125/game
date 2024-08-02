@@ -33,10 +33,10 @@ function love.load()
 
     background = Background(img.background)
     high_score_state = HighScoreState()
-    
-    pause_state = Menu("Breakout",{
-        {'START','play'},
-        {'HIGHSCORE','highscore'},
+
+    pause_state = Menu("Breakout", {
+        { 'START',     'play' },
+        { 'HIGHSCORE', 'highscore' },
     })
     state_machine = StateMachine {
         ['start'] = function() return StartState() end,
@@ -44,12 +44,12 @@ function love.load()
         ['highscore'] = function() return high_score_state end,
         -- ['gameover'] = function() return GameOverState() end,
         ['play'] = function() return PlayState() end,
-           -- ['paddleselect'] = function() return PaddleSelectState() end,
+        -- ['paddleselect'] = function() return PaddleSelectState() end,
         -- ['serve'] = function() return ServeState() end,
         -- ['victory'] = function() return VictoryState() end
-        
+
     }
-    
+
     state_machine:change('start')
 end
 
@@ -63,6 +63,6 @@ function love.draw()
     background:render()
 
     state_machine:render()
-    
+
     push:finish()
 end

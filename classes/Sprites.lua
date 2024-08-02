@@ -32,23 +32,6 @@ function Sprites:init(img, x, y, x_count, y_count, positions)
                 ["right"] = 3,
             }
         }
-
-    local default_positions = {
-        ["up_right"] = 0,
-        ["down_right"] = 1,
-        ["right_left"] = 2,
-        ["left_right"] = 3,
-        ["up_left"] = 4,
-        ["down_left"] = 5,
-        ["right_right"] = 6,
-        ["left_left"] = 7,
-        ["up"] = 8,
-        ["down"] = 9,
-        ["right"] = 10,
-        ["left"] = 11,
-    }
-
-    self.positions = positions or default_positions
     
     self.quads = self:Quads()
 end

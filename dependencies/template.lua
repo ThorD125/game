@@ -20,4 +20,4 @@ require 'classes.Character'
 require 'classes.Movement'
 require 'classes.HealthBar_Minecraft'
 require 'classes.Sprites'
-
+require 'classes.Animation'

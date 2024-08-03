@@ -16,27 +16,27 @@ function love.load()
         resizable = true,
         vsync = true
     })
-    
+
 
     background = Background(img.background, 0, background_scroll_speed)
-    
+
 
     state_machine = StateMachine {
         ['menu'] = function() return MatchMenu() end,
         ['start'] = function() return StartState() end,
-        ['countdown'] = function () return CountdownState() end,
-        ['play'] = function () return PlayState() end,
-            
+        ['countdown'] = function() return CountdownState() end,
+        ['play'] = function() return PlayState() end,
+
         -- ['enterhighscore'] = function() return EnterHighScoreState() end,
         -- ['highscore'] = function() return high_score_state end,
         -- ['gameover'] = function() return GameOverState() end,
         -- ['play'] = function() return PlayState() end,
-           -- ['paddleselect'] = function() return PaddleSelectState() end,
+        -- ['paddleselect'] = function() return PaddleSelectState() end,
         -- ['serve'] = function() return ServeState() end,
         -- ['victory'] = function() return VictoryState() end
-        
+
     }
-    
+
     -- state_machine:change('menu')
     state_machine:change('play')
     -- state_machine:change('countdown')
@@ -53,6 +53,6 @@ function love.draw()
     background:render()
 
     state_machine:render()
-    
+
     push:finish()
 end

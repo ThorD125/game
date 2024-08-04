@@ -1,13 +1,13 @@
-Sprite_Animations = Class {}
+Animation = Class {}
 
-function Sprite_Animations:init(frames, interval)
+function Animation:init(frames, interval)
     self.frames = frames
-    self.interval = interval
+    self.interval = interval or 0.3
     self.timer = 0
     self.currentFrame = 1
 end
 
-function Sprite_Animations:update(dt)
+function Animation:update(dt)
     if #self.frames > 1 then
         self.timer = self.timer + dt
 
@@ -19,6 +19,6 @@ function Sprite_Animations:update(dt)
     end
 end
 
-function Sprite_Animations:current_move()
+function Animation:current_move()
     return self.frames[self.currentFrame]
 end
